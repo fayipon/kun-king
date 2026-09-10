@@ -1,6 +1,6 @@
 # My 帳戶頁還原
 
-- 狀態：已核准開始，本機完成，待部署驗證。
+- 狀態：完成，已部署並驗證。
 - 設計來源：Design/kunking_my_reference_aligned.png。
 
 ## 範圍與路由
