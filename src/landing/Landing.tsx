@@ -45,7 +45,7 @@ export default function Landing() {
     catch { setStorageError(true) }
   }, [favorites])
 
-  useEffect(() => { if (searchOpen) search.current?.focus() }, [searchOpen])
+  useEffect(() => { if (searchOpen) { search.current?.focus(); search.current?.parentElement?.scrollIntoView({ block: 'start', behavior: 'instant' }) } }, [searchOpen])
 
   useEffect(() => {
     if (!selected) return
@@ -75,7 +75,7 @@ export default function Landing() {
   return <div className="kk-lobby">
     <header className="kk-header"><Link to="/" className="kk-back" aria-label="Back to portal"><ArrowLeft size={18} /></Link>
       <Link to="/frontend" className="kk-logo" onClick={resetHome}><span><Crown size={23} /></span><div>KUN<span>KING</span><small>YOUR PLAYGROUND</small></div></Link>
-      <div className="kk-header-tools"><span className="kk-demo"><i />Explore mode</span><button aria-label={searchOpen ? 'Close search' : 'Open search'} aria-expanded={searchOpen} onClick={() => { setSearchOpen(value => !value); setQuery('') }}>{searchOpen ? <X size={19} /> : <Search size={19} />}</button></div>
+      <div className="kk-header-tools kk-auth-links"><Link to="/login">Log In</Link><Link to="/register">Register</Link></div>
     </header>
     <main className="kk-main">
       {searchOpen && <div className="kk-search"><Search size={17} /><input ref={search} aria-label="Search games" placeholder="Find your next favorite…" value={query} onChange={event => { setQuery(event.target.value); setExpanded([]) }} />{query && <button aria-label="Clear search" onClick={() => { setQuery(''); search.current?.focus() }}><X size={17} /></button>}</div>}
@@ -84,9 +84,9 @@ export default function Landing() {
         {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={21} /></span>{label}</button>)}
       </div>
       <section className="kk-catalog" ref={catalog} aria-label="Game catalog">
-        {sections.map(({ id, title, subtitle, icon: Icon, items }) => <section className="kk-game-section" key={id} aria-label={title}>
+        {sections.map(({ id, title, subtitle, icon: Icon, items }, sectionIndex) => <section className="kk-game-section" key={id} aria-label={title}>
           <div className="kk-section-heading"><div><Icon size={19} /><h2>{title}<small>{subtitle}</small></h2></div>
-            {items.length > 9 && <button onClick={() => setExpanded(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id])} aria-expanded={expanded.includes(id)} aria-label={`${expanded.includes(id) ? 'Show less' : 'View all'} ${title}`}>{expanded.includes(id) ? 'Show less' : 'View all'}<ChevronRight size={14} /></button>}
+            <div className="kk-list-tools">{sectionIndex === 0 && <button aria-label={searchOpen ? 'Close search' : 'Open search'} aria-expanded={searchOpen} onClick={() => { setSearchOpen(value => !value); setQuery('') }}>{searchOpen ? <X size={17} /> : <Search size={17} />}</button>}{items.length > 9 && <button onClick={() => setExpanded(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id])} aria-expanded={expanded.includes(id)} aria-label={`${expanded.includes(id) ? 'Show less' : 'View all'} ${title}`}>{expanded.includes(id) ? 'Show less' : 'View all'}<ChevronRight size={14} /></button>}</div>
           </div>
           {items.length ? <div className="kk-game-grid">{items.slice(0, expanded.includes(id) ? items.length : 9).map((game, index) => <button className="kk-game-card" key={game.id} onClick={event => { opener.current = event.currentTarget; setSelected(game) }} aria-label={`View ${game.name}`}>
             <div className="kk-cover"><img src={game.image} alt={game.name} width="320" height="320" loading={id === 'hot' && index < 3 ? 'eager' : 'lazy'} decoding="async" />{favorites.includes(game.id) && <span className="kk-saved" aria-label="Saved"><Heart size={12} fill="currentColor" /></span>}</div>

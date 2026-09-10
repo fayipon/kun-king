@@ -65,6 +65,8 @@ npm test         # 輪播、搜尋、分類及收藏互動測試
 | --- | --- |
 | `#/` | 項目入口：前台與後台 |
 | `#/frontend` | 手機遊戲大廳：三張輪播、遊戲搜尋、分類、收藏與資訊面板 |
+| `#/login` | 英文登入獨立頁：前端驗證、密碼顯示與識別名稱記憶 |
+| `#/register` | 英文註冊獨立頁：欄位、密碼確認與條款勾選驗證 |
 | `#/play` | Godot 示範：檢查 Web 資源，完成匯出後提供啟動按鈕 |
 | `#/admin` | 管理後台骨架：遊戲內容、項目設定、資源管理 |
 
@@ -119,3 +121,11 @@ public/game/         Godot Web 匯出輸出位置
 分類切換使用 300ms 選中背景滑移、圖示上提及縮放、光暈與文字顏色轉場；減少動態效果設定下即時切換。詳見 [分類轉場計畫](Plans/006-feature-category-motion.md)。
 
 前台 Header 捲動時保持置頂；搜尋焦點以完整圓角外框呈現。遊戲卡片僅保留名稱與右側箭頭，長名稱省略顯示。詳見 [調整計畫](Plans/007-header-search-game-cards.md)。
+
+## 登入與註冊
+
+前台 Header 提供 Log In／Register，分別前往 [登入](https://fayipon.github.io/kun-king/#/login) 與 [註冊](https://fayipon.github.io/kun-king/#/register)。使用既有 HashRouter；GitHub Pages 分享網址需保留 #。
+
+兩頁採原創遊戲熊背景、玻璃表單與紫色／青綠呼吸光暈；減少動態效果設定下停用動畫。素材與提示詞見 [Design/auth](Design/auth/README.md)。首頁搜尋移至第一個遊戲列表標題旁，分類與第一個標題間距為 8px。
+
+目前未連接驗證 API、OAuth、忘記密碼及正式條款服務。表單只做前端驗證並顯示英文未連接提示，不建立帳號或登入 session；密碼不寫入儲存空間。Remember me 只保存識別名稱至本機，取消勾選即移除。社群、忘記密碼與條款入口提供可關閉的說明面板。

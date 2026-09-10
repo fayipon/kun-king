@@ -60,8 +60,8 @@
 .kk-dots button span { width: 5px; height: 5px; background: #5d726b; border-radius: 10px; transition: width .2s; }
 .kk-dots button[aria-pressed=true] span { width: 17px; background: var(--mint); }
 .kk-lobby .kk-banner-pause { position: absolute; top: 8px; right: 8px; z-index: 3; width: 30px; height: 30px; display: grid; place-items: center; color: #d7f6e9; background: #07191473; border: 1px solid #ffffff20; border-radius: 50%; backdrop-filter: blur(6px); }
-.kk-categories { position: relative; isolation: isolate; --category-gap: 4px; --category-width: calc((100% - 5 * var(--category-gap)) / 6); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--category-gap); padding: 14px 0 18px; scroll-margin-top: calc(var(--header-height) + 12px); }
-.kk-categories::before { content: ""; position: absolute; pointer-events: none; z-index: -1; top: 14px; bottom: 18px; left: calc(var(--category-index) * (var(--category-width) + var(--category-gap))); width: var(--category-width); border-radius: 9px; background: linear-gradient(#1e4943,#14362f); box-shadow: inset 0 0 0 1px #5df5c229; opacity: 0; transition: left 300ms cubic-bezier(.22,1,.36,1), opacity 180ms ease; }
+.kk-categories { position: relative; isolation: isolate; --category-gap: 4px; --category-width: calc((100% - 5 * var(--category-gap)) / 6); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--category-gap); padding: 14px 0 0; scroll-margin-top: calc(var(--header-height) + 12px); }
+.kk-categories::before { content: ""; position: absolute; pointer-events: none; z-index: -1; top: 14px; bottom: 0; left: calc(var(--category-index) * (var(--category-width) + var(--category-gap))); width: var(--category-width); border-radius: 9px; background: linear-gradient(#1e4943,#14362f); box-shadow: inset 0 0 0 1px #5df5c229; opacity: 0; transition: left 300ms cubic-bezier(.22,1,.36,1), opacity 180ms ease; }
 .kk-categories[data-selected="true"]::before { opacity: 1; }
 .kk-categories button { display: flex; align-items: center; flex-direction: column; gap: 7px; padding: 9px 0; font-size: 10px; color: #9badb4; border-radius: 9px; min-width: 0; min-height: 44px; white-space: nowrap; transition: color 250ms ease; }
 .kk-categories button span { width: 37px; height: 32px; display: grid; place-items: center; color: #92b6cc; transition: transform 300ms cubic-bezier(.22,1,.36,1), color 250ms ease, filter 300ms ease; }
@@ -74,12 +74,13 @@
 .kk-categories button.active span { color: var(--mint); transform: translateY(-3px) scale(1.1); filter: drop-shadow(0 0 6px #5df5c255); }
 .kk-catalog { scroll-margin-top: calc(var(--header-height) + 15px); }
 .kk-game-section { margin-top: 23px; }
+.kk-game-section:first-child { margin-top: 8px; }
 .kk-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
 .kk-section-heading > div { display: flex; align-items: center; gap: 7px; }
 .kk-section-heading > div > svg { color: #65edba; }
 .kk-section-heading h2 { font-size: 16px; letter-spacing: .3px; font-weight: 700; margin: 0; }
 .kk-section-heading h2 small { display: block; font-size: 7px; font-weight: 500; letter-spacing: 1.4px; color: #708c97; margin-top: 3px; }
-.kk-section-heading > button { color: #80c1ac; display: flex; align-items: center; gap: 3px; font-size: 10px; min-height: 32px; white-space: nowrap; }
+.kk-list-tools > button { color: #80c1ac; display: flex; align-items: center; gap: 3px; font-size: 10px; min-height: 32px; white-space: nowrap; }
 .kk-game-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px 9px; }
 .kk-game-card { text-align: left; min-width: 0; border-radius: 10px; }
 .kk-cover { position: relative; aspect-ratio: 1; border-radius: 9px; overflow: hidden; background: #233946; box-shadow: 0 4px 12px #0002; }
@@ -136,3 +137,9 @@
   .kk-game-grid { gap: 13px 7px; }.kk-game-name { font-size: 9px; }.kk-discover { gap: 7px; padding: 14px 9px; }.kk-discover h3 { font-size: 10px; }
 }
 @media (prefers-reduced-motion:reduce) { .kk-lobby *, .kk-lobby *::before, .kk-lobby *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }.kk-banner { transform: none; } .kk-categories button.active span { transform: none; } }
+
+.kk-auth-links a { display: grid; place-items: center; min-height: 36px; padding: 0 11px; border-radius: 7px; font-size: 11px; font-weight: 650; text-decoration: none; color: var(--mint); white-space: nowrap; }
+.kk-auth-links a:last-child { color: #08251f; background: var(--mint); }
+.kk-list-tools { display: flex; align-items: center; gap: 10px; }
+.kk-list-tools > button:first-child { min-width: 30px; min-height: 36px; }
+@media(max-width:360px) { .kk-auth-links { gap: 2px; }.kk-auth-links a { padding: 0 7px; font-size: 10px; } }
