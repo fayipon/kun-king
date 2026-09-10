@@ -7,4 +7,3 @@
 html.frontend-document { scrollbar-gutter:stable; scroll-behavior:auto; }
 .frontend-layout .kk-main { padding:14px 16px 0; }
 .frontend-layout .kk-bottom-nav { left:0; right:0; margin-inline:auto; transform:none; }
-.my-header-actions a { position:relative; display:grid; place-items:center; min-width:36px; min-height:44px; color:#8da6ad; }.my-header-actions i { position:absolute; top:10px; right:7px; width:5px; height:5px; border-radius:50%; background:var(--mint); }

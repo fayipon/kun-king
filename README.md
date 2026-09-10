@@ -160,7 +160,7 @@ public/game/         Godot Web 匯出輸出位置
 
 ## My 帳戶預覽
 
-[My頁](https://fayipon.github.io/kun-king/#/my)依Design/kunking_my_reference_aligned.png實作，包含個人資料、VIP進度、期間統計、帳戶選單與遊戲紀錄。底部My開啟獨立頁，共用Header在My顯示通知／設定；登入、註冊與收藏位於個人資料面板。
+[My頁](https://fayipon.github.io/kun-king/#/my)依Design/kunking_my_reference_aligned.png實作，包含個人資料、VIP進度、期間統計、帳戶選單與遊戲紀錄。底部My開啟獨立頁，共用Header與Home、Promo一致顯示Log In／Register；登入、註冊與收藏位於個人資料面板。
 
 帳戶狀態、金額與紀錄均為示範；未串接帳戶、2FA、KYC或金流。複製ID有成功／失敗提示，Log Out確認後離開預覽返回登入，不清除收藏。
 
