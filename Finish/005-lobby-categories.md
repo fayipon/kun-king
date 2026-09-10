@@ -2,7 +2,7 @@
 
 - 日期：2026-09-10
 - 對應計畫：[Plans/005](../Plans/005-lobby-categories.md)
-- 狀態：本機驗收通過，待線上部署驗證。
+- 狀態：已完成，本機及線上驗收通過。
 
 ## 完成內容
 
@@ -22,9 +22,15 @@
 | C05 | 通過：互動測試確認 View picks 選中 Popular |
 | C06 | 通過：既有收藏保存、重掛載恢復、刪除及面板開關測試通過 |
 | C07 | 通過：瀏覽器 320／390／430／1280px 檢查，五項 y 座標一致，按鈕無截斷，頁面無水平溢出；390px 截圖檢視通過，Perya Enter 操作及 solid 焦點外框確認 |
-| C08 | 本機通過：npm test 共 13 項通過；npm run build 通過；git diff --check 通過。線上待確認 |
+| C08 | 本機通過：npm test 共 13 項通過；npm run build 通過；git diff --check 通過。線上通過：五分類標籤、Hot 16 GAMES、Perya 提示及返回 ALL 已確認 |
 
 ## 限制
 
 - Perya 尚無已確認的遊戲清單，依核准計畫保留空狀態。
 - 手機尺寸以桌面瀏覽器 viewport 模擬，未使用實體手機。
+
+## 部署
+
+- 實作版本：`99238f4`，已 push 至 main。
+- [GitHub Actions](https://github.com/fayipon/kun-king/actions/runs/34468761396)：success。
+- [正式前台](https://fayipon.github.io/kun-king/#/frontend)：重新載入後確認標語已移除，分類順序正確，Hot／Perya／ALL 操作正常。
