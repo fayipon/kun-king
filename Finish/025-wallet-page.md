@@ -26,4 +26,5 @@
 
 ## 部署
 
-- 待確認 GitHub Pages。
+- 程式版本 c6f666e；GitHub Actions 34491145240 成功，包含正式測試、建置及部署。
+- 線上 #/wallet 直連與刷新正常，總額 ₱13,300.00、預設五列紀錄、Wallet 高亮且僅一組 Header。
