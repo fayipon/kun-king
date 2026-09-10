@@ -58,13 +58,12 @@ it('uses Promo content when switching banners and cleans up dialog before login'
 
 it('shares one header and nav on every frontend content route, excludes auth and portal', async () => {
   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:false,headers:new Headers()}))
-  for (const route of ['/frontend','/promo','/my','/play']) {
+  for (const route of ['/frontend','/promo','/my','/wallet','/play']) {
     const view=mount(route)
     expect(document.querySelectorAll('.kk-header').length).toBe(1)
     expect(screen.getAllByRole('navigation',{name:'Lobby navigation'}).length).toBe(1)
     fireEvent.click(screen.getByRole('button',{name:'Wallet',exact:true}))
-    expect(screen.getByRole('dialog',{name:'Wallet'})).toBeTruthy()
-    fireEvent.click(screen.getByRole('button',{name:'Close menu'}))
+    expect(screen.getByRole('heading',{name:'Wallet',exact:true})).toBeTruthy()
     view.unmount()
   }
   for(const route of ['/login','/register','/','/admin']) {

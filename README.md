@@ -136,7 +136,7 @@ public/game/         Godot Web 匯出輸出位置
 
 ## 前台導覽與分類一致性
 
-底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo／Wallet／Affiliate 提供準備中說明，My 提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
+底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo、Wallet、My 開啟各自頁面；Affiliate 提供準備中說明，My 個人資料面板提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
 
 目前無真實登入狀態，公開前台不顯示搜尋圖示或搜尋框；待接上帳號服務再提供登入後搜尋。詳見 [Plans/011](Plans/011-navigation-catalog-consistency.md)。
 
@@ -165,3 +165,11 @@ public/game/         Godot Web 匯出輸出位置
 帳戶狀態、金額與紀錄均為示範；未串接帳戶、2FA、KYC或金流。複製ID有成功／失敗提示，Log Out確認後離開預覽返回登入，不清除收藏。
 
 前台共用內容起點（上14px／左右16px）與穩定捲軸空間，固定導覽使用相同置中基準，路由切換在繪製前回頂部，減少Home／Promo切換位移。
+
+## Wallet 錢包預覽
+
+[Wallet 頁](https://fayipon.github.io/kun-king/#/wallet)依 Design/wallet-mobile.png 還原，沿用 480px 共用前台 Header 與導覽，右側為 Log In／Register。底部 Wallet 及 My 的 Wallet & transactions 直接進入。
+
+提供餘額卡顯示／隱藏、流水進度、期間統計、交易類別與期間篩選、展開完整示範清單、交易詳情及客服說明。示範日期固定於 2026 年 9 月（Today 為 2026-09-10）；交易清單為選取的範例紀錄，並非統計數字的完整帳本。
+
+Deposit／Withdraw 僅顯示服務準備中及登入／註冊入口，不接受付款、不提交提款、不變更餘額。詳見 [Plans/025](Plans/025-wallet-page.md) 與 [Finish/025](Finish/025-wallet-page.md)。
