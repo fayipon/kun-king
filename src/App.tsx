@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { ArrowUpRight, ArrowLeft, Crown, Gamepad2, LayoutDashboard, Layers3, Box, CircleHelp } from 'lucide-react'
+import Landing from './landing/Landing'
 
 function Home() {
   return <>
@@ -51,9 +52,10 @@ function Admin() {
 
 export default function App() {
   const { pathname } = useLocation()
-  useEffect(() => { document.title = `Kun King · ${pathname === '/' ? '項目入口' : pathname === '/frontend' ? '遊戲前台' : pathname === '/admin' ? '管理後台' : '找不到頁面'}`; window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => { document.title = `Kun King · ${pathname === '/' ? '項目入口' : pathname === '/frontend' ? '遊戲大廳' : pathname === '/play' ? 'Godot 示範' : pathname === '/admin' ? '管理後台' : '找不到頁面'}`; window.scrollTo(0, 0) }, [pathname])
+  if (pathname === '/frontend') return <Landing />
   return <div className="app-shell"><header><Link className="brand" to="/" aria-label="Kun King 首頁"><span className="brand-mark"><Crown size={22} /></span>KUN KING<span className="brand-divider" /><span className="brand-caption">項目空間</span></Link><nav aria-label="主要導覽"><NavLink to="/" end>項目入口</NavLink><span className="version">V 0.1</span></nav></header>
-    <main><Routes><Route path="/" element={<Home />} /><Route path="/frontend" element={<Frontend />} /><Route path="/admin" element={<Admin />} /><Route path="*" element={<section className="subpage"><h1>找不到這個頁面。</h1><Link className="back-link" to="/">返回項目入口 <ArrowUpRight size={18} /></Link></section>} /></Routes></main>
+    <main><Routes><Route path="/" element={<Home />} /><Route path="/play" element={<Frontend />} /><Route path="/admin" element={<Admin />} /><Route path="*" element={<section className="subpage"><h1>找不到這個頁面。</h1><Link className="back-link" to="/">返回項目入口 <ArrowUpRight size={18} /></Link></section>} /></Routes></main>
     <footer><span>© {new Date().getFullYear()} Kun King</span><span className="footer-tag">一個世界，無限可能。<span className="tiny-star">✳</span></span><span>BUILT WITH REACT + GODOT</span></footer>
   </div>
 }

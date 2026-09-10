@@ -34,17 +34,17 @@ React SPA 與 Godot 遊戲整合專案。首頁提供「前台」與「後台」
 - [遊戲前台](https://fayipon.github.io/kun-king/#/frontend)
 - [管理後台](https://fayipon.github.io/kun-king/#/admin)
 
-發布來源為 GitHub Actions，工作流程位於 [pages.yml](.github/workflows/pages.yml)。推送程式或設定變更至 `main` 後，會自動使用 Node.js 22、`npm ci` 與 `npm run build` 建置，再將 `dist/` 部署至 Pages。僅 Markdown 文件變更不觸發部署；也可在 [Actions](https://github.com/fayipon/kun-king/actions/workflows/pages.yml) 選擇 **Run workflow** 手動發布。
+發布來源為 GitHub Actions，工作流程位於 [pages.yml](.github/workflows/pages.yml)。推送程式或設定變更至 `main` 後，會自動使用 Node.js 22、`npm ci`、`npm test` 與 `npm run build` 驗證及建置，再將 `dist/` 部署至 Pages。僅 Markdown 文件變更不觸發部署；也可在 [Actions](https://github.com/fayipon/kun-king/actions/workflows/pages.yml) 選擇 **Run workflow** 手動發布。
 
 儲存庫 **Settings → Pages → Source** 使用 **GitHub Actions**。Vite 使用相對資源路徑 `base: './'`，路由使用 HashRouter，適用 `/kun-king/` 子路徑；分享子頁面時請保留 `#/frontend` 或 `#/admin`。
 
-目前部署只包含 React 靜態頁面。Godot Web 匯出成品未納入 Git，工作流程也尚未匯出遊戲，因此前台顯示準備中；後台為公開預覽骨架，尚無登入或管理 API。Godot 成品的自動發布另列後續計畫。
+目前部署包含可互動的 React 手機遊戲大廳。Godot Web 匯出成品未納入 Git，工作流程也尚未匯出遊戲，因此 `#/play` 示範頁顯示準備中；後台為公開預覽骨架，尚無登入或管理 API。Godot 成品的自動發布另列後續計畫。
 
 部署失敗時請查看 Actions 的 build／deploy 記錄；修正後重新推送，或手動重新執行工作流程。發布方式參考 [GitHub Pages 官方文件](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
 
 ## 快速開始
 
-需求：Node.js 22.12+、npm；遊戲開發另需 Godot 4.3+ 及相同版本的 Export Templates。
+需求：Node.js 22.22.2+（22.x）、24.15.0+（24.x）或 26+、npm，版本要求包含測試環境；遊戲開發另需 Godot 4.3+ 及相同版本的 Export Templates。
 
 ```sh
 npm install
@@ -56,6 +56,7 @@ npm run dev
 ```sh
 npm run build    # TypeScript 檢查與正式建置，輸出 dist/
 npm run preview  # 預覽正式建置
+npm test         # 輪播、搜尋、分類及收藏互動測試
 ```
 
 ## 頁面
@@ -63,10 +64,22 @@ npm run preview  # 預覽正式建置
 | 路徑 | 說明 |
 | --- | --- |
 | `#/` | 項目入口：前台與後台 |
-| `#/frontend` | 遊戲前台：檢查 Godot Web 資源並提供啟動按鈕 |
+| `#/frontend` | 手機遊戲大廳：三張輪播、遊戲搜尋、分類、收藏與資訊面板 |
+| `#/play` | Godot 示範：檢查 Web 資源，完成匯出後提供啟動按鈕 |
 | `#/admin` | 管理後台骨架：遊戲內容、項目設定、資源管理 |
 
 使用 HashRouter 實現 SPA，重新整理與靜態主機不需額外路由 rewrite。後台目前為開發預覽，尚未實作帳號登入、權限驗證、API 或資料儲存。
+
+## 手機版前台
+
+前台採深色手機優先版面，桌面置中並限制 480px 寬。三張原創 Banner 每 5 秒輪播，支援前後切換、圓點、左右滑動與播放／暫停。滑鼠停留、鍵盤焦點進入或頁籤隱藏時暫停；啟用減少動態效果時停用自動播放與轉場。
+
+遊戲可搜尋、依展示分類篩選、展開更多卡片，並在資訊面板加入收藏。收藏使用瀏覽器 localStorage 保存，不跨裝置同步；目前各遊戲只展示資訊，尚未串接實際遊戲。人氣與新作為示範編排。
+
+- 原始遊戲圖：`Design/games/`，共 134 張，保留原檔；目前挑選 32 張作為展示資料。
+- 前端封面：`public/games/`，320px WebP，依可見區域延遲載入。
+- 原創 Banner：`Design/banners/`；[生成提示詞與素材紀錄](Design/banners/README.md)。使用內建 ImageGen 生成，前端以 `public/banners/` 的 960px WebP 載入，文案為 HTML 疊加。
+- 展示資料與元件：`src/landing/`；測試：`tests/landing.test.tsx`。
 
 ## Godot 開發與整合
 
@@ -79,10 +92,10 @@ npm run preview  # 預覽正式建置
    ```
 
    或從 Godot「Project → Export → Web」匯出至 `public/game/index.html`。
-4. `npm run dev` 開啟前台，按「啟動遊戲」。React 透過 iframe 載入 Godot Web 成品；切換頁面會卸載遊戲，示範步數不保存。
+4. `npm run dev` 開啟 `#/play`（或前台頁尾「遊戲說明 → Godot 示範」），按「啟動遊戲」。React 透過 iframe 載入 Godot Web 成品；切換頁面會卸載遊戲，示範步數不保存。
 5. 正式發布請先匯出遊戲，再執行 `npm run build`，將完整 `dist/` 部署至靜態主機。
 
-Web 使用 Compatibility renderer 與單執行緒；主機須正確提供 `.js` JavaScript 與 `.wasm` `application/wasm` MIME 類型。瀏覽器需支援 WebGL 2.0 與 WebAssembly。匯出成品不納入 Git，新的 checkout 需重新匯出；尚未匯出時前台會顯示準備中。參考 [Godot 官方 Web 匯出文件](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)。
+Web 使用 Compatibility renderer 與單執行緒；主機須正確提供 `.js` JavaScript 與 `.wasm` `application/wasm` MIME 類型。瀏覽器需支援 WebGL 2.0 與 WebAssembly。匯出成品不納入 Git，新的 checkout 需重新匯出；尚未匯出時 Godot 示範頁會顯示準備中。參考 [Godot 官方 Web 匯出文件](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)。
 
 ## 專案結構
 
