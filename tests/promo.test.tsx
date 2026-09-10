@@ -1,3 +1,5 @@
+import { welcomeVisit } from '../src/landing/WelcomeModal'
+import FrontendLayout from '../src/FrontendLayout'
 import { beforeEach, afterEach, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent, within, cleanup } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
@@ -5,7 +7,7 @@ import App from '../src/App'
 beforeEach(() => {
   vi.stubGlobal('matchMedia', () => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }))
   window.scrollTo = vi.fn(); Element.prototype.scrollIntoView = vi.fn()
-  sessionStorage.setItem('kun-king:welcome-dismissed:v1', 'yes')
+  welcomeVisit.dismissed = true
   HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', '') }
   HTMLDialogElement.prototype.close = function () { this.removeAttribute('open') }
 })
@@ -15,8 +17,8 @@ it('routes from lobby to Promo and back and supports direct Promo entry', () => 
   mount('/frontend'); fireEvent.click(within(screen.getByRole('navigation', { name: 'Lobby navigation' })).getByRole('button', { name: 'Promo' }))
   expect(screen.getByRole('heading', { name: 'Featured Promotions' })).toBeTruthy()
   expect(screen.queryByRole('dialog')).toBeNull()
-  expect(screen.getByRole('link', { name: 'Promo', exact: true }).getAttribute('aria-current')).toBe('page')
-  fireEvent.click(screen.getByRole('link', { name: 'Home', exact: true }))
+  expect(screen.getByRole('button', { name: 'Promo', exact: true }).getAttribute('aria-current')).toBe('page')
+  fireEvent.click(screen.getByRole('button', { name: 'Home', exact: true }))
   expect(screen.getByRole('region', { name: 'Game catalog' })).toBeTruthy()
 })
 it('opens each activity, restores focus and unlocks scrolling on close', () => {
@@ -52,4 +54,25 @@ it('uses Promo content when switching banners and cleans up dialog before login'
   expect(screen.getByRole('dialog', { name: 'Lucky Spin' })).toBeTruthy()
   fireEvent.click(within(screen.getByRole('dialog')).getByRole('link', { name: 'Log In' }))
   expect(screen.getByRole('heading', { name: 'Welcome back' })).toBeTruthy(); expect(document.body.style.overflow).not.toBe('hidden')
+})
+
+it('shares one header and nav on every frontend content route, excludes auth and portal', async () => {
+  vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:false,headers:new Headers()}))
+  for (const route of ['/frontend','/promo','/play']) {
+    const view=mount(route)
+    expect(document.querySelectorAll('.kk-header').length).toBe(1)
+    expect(screen.getAllByRole('navigation',{name:'Lobby navigation'}).length).toBe(1)
+    fireEvent.click(screen.getByRole('button',{name:'Wallet',exact:true}))
+    expect(screen.getByRole('dialog',{name:'Wallet'})).toBeTruthy()
+    fireEvent.click(screen.getByRole('button',{name:'Close menu'}))
+    view.unmount()
+  }
+  for(const route of ['/login','/register','/','/admin']) {
+    const view=mount(route);expect(screen.queryByRole('navigation',{name:'Lobby navigation'})).toBeNull();view.unmount()
+  }
+})
+it('changes same-page favorites through the common My panel and Home resets them', () => {
+  mount('/frontend');fireEvent.click(screen.getByRole('button',{name:'My',exact:true}));fireEvent.click(screen.getByRole('button',{name:'My Favorites',exact:true}));
+  expect(screen.getByRole('region',{name:'My Favorites',exact:true})).toBeTruthy();fireEvent.click(screen.getByRole('button',{name:'Home',exact:true}));
+  expect(screen.getByRole('region',{name:'Hot',exact:true})).toBeTruthy()
 })

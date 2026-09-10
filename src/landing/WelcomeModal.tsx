@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Crown, Gamepad2, Gift, Sparkles, X } from 'lucide-react'
 import './welcome.css'
 
-export const welcomeKey = 'kun-king:welcome-dismissed:v1'
-function shouldWelcome() {
-  try { return sessionStorage.getItem(welcomeKey) !== 'yes' } catch { return true }
-}
+export const welcomeVisit = { dismissed: false }
+function shouldWelcome() { return !welcomeVisit.dismissed }
 
 export default function WelcomeModal() {
   const [open, setOpen] = useState(shouldWelcome)
@@ -27,7 +25,7 @@ export default function WelcomeModal() {
     }
   }, [open])
   function dismiss() {
-    try { sessionStorage.setItem(welcomeKey, 'yes') } catch { /* Dismissal still works without storage. */ }
+    welcomeVisit.dismissed = true
     setOpen(false)
   }
   return <>

@@ -1,0 +1,6 @@
+.frontend-layout { --header-height:72px; }
+.frontend-layout .kk-header { align-items:center; padding:0 16px; gap:9px; background:#13222b; }
+.frontend-layout .kk-bottom-nav button.active { color:var(--mint); }
+.frontend-game .subpage { padding:16px 0; }.frontend-game .subpage h1 { font-size:28px; }.frontend-game .game-panel { width:100%; }.frontend-game iframe { width:100%; border:0; min-height:360px; }
+@media(max-width:360px) { .frontend-layout .kk-header { padding:0 10px; gap:5px; }.frontend-layout .kk-logo > div { font-size:16px; } }
+.frontend-game .game-panel { background:#132d30; border:1px solid #325048; color:#f1f7f5; }.frontend-game .empty-state h2 { color:#f1f7f5; }.frontend-game .empty-state > svg { color:var(--mint); }.frontend-game .empty-state button { background:var(--mint); color:#08251f; padding:12px 20px; border-radius:8px; }

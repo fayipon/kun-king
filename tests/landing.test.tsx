@@ -1,3 +1,5 @@
+import { welcomeVisit } from '../src/landing/WelcomeModal'
+import FrontendLayout from '../src/FrontendLayout'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { HashRouter } from 'react-router-dom'
@@ -8,11 +10,12 @@ import { favoriteKey, readFavorites } from '../src/landing/games'
 let reduced = false
 let motionListeners: Set<() => void>
 beforeEach(() => {
+  window.history.replaceState(null, "", "/")
   reduced = false
   motionListeners = new Set()
   vi.stubGlobal('matchMedia', () => ({ get matches() { return reduced }, addEventListener: (_: string, fn: () => void) => motionListeners.add(fn), removeEventListener: (_: string, fn: () => void) => motionListeners.delete(fn) }))
   Object.defineProperty(document, 'hidden', { configurable: true, value: false })
-  sessionStorage.setItem('kun-king:welcome-dismissed:v1', 'yes')
+  welcomeVisit.dismissed = true
   localStorage.clear()
   Element.prototype.scrollIntoView = vi.fn()
   window.scrollTo = vi.fn()
@@ -113,7 +116,7 @@ describe('Banner behavior', () => {
 })
 
 describe('Lobby categories and navigation', () => {
-  const mount = () => render(<HashRouter><Landing /></HashRouter>)
+  const mount = () => render(<HashRouter><FrontendLayout><Landing /></FrontendLayout></HashRouter>)
   const cards = (region: HTMLElement) => within(region).queryAllByRole('button', { name: /^View (?!all )/ }).map(e => e.getAttribute('aria-label'))
   const favorites = () => { fireEvent.click(screen.getByRole('button', { name: 'My', exact: true })); fireEvent.click(screen.getByRole('button', { name: 'My Favorites', exact: true })) }
   it('keeps all five section titles and expanded game order identical to individual categories', () => {

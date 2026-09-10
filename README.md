@@ -142,7 +142,7 @@ public/game/         Godot Web 匯出輸出位置
 
 ## 首頁歡迎彈窗
 
-前台首頁於每個分頁工作階段首次進入時顯示 Welcome Rewards 彈窗，背景暗化並模糊 8px，青綠／紫色邊框以 9 秒循環緩慢變色。X、Maybe Later、Esc 或遮罩均可關閉，頁尾 Welcome Rewards 可重新開啟。Create Account 前往註冊；目前獎勵僅為 Coming Soon 預告。減少動態效果設定下停用漸層動畫。詳見 [Plans/012](Plans/012-welcome-modal.md) 及 [素材與提示詞](Design/welcome/README.md)。
+前台首頁於每次頁面載入後首次進入時顯示 Welcome Rewards 彈窗，背景暗化並模糊 8px，青綠／紫色邊框以 9 秒循環緩慢變色。X、Maybe Later、Esc 或遮罩均可關閉，頁尾 Welcome Rewards 可重新開啟。Create Account 前往註冊；目前獎勵僅為 Coming Soon 預告。減少動態效果設定下停用漸層動畫。詳見 [Plans/012](Plans/012-welcome-modal.md) 及 [素材與提示詞](Design/welcome/README.md)。
 
 登入與註冊頁右上角提供 X，返回前台首頁。歡迎彈窗的裝飾素材透過瀏覽器 alpha 濾鏡清理低透明度殘影，保留原始素材及全頁模糊遮罩。
 
@@ -151,3 +151,9 @@ public/game/         Godot Web 匯出輸出位置
 [活動頁](https://fayipon.github.io/kun-king/#/promo) 提供 Welcome Bonus／Daily Check-in／Lucky Spin 三張輪播、四張活動卡、三列任務、完整活動清單與詳情面板。首頁底部 Promo 直接進入本頁。Home 返回首頁；Go Play 定位遊戲列表；My Favorites 開啟收藏列表。
 
 活動百分比、獎勵數字與進度均為示範，頁面標示 Preview／Demo，尚未串接領獎、支付、邀請或帳號服務。詳見 [Plans/015](Plans/015-promo-page.md)、[驗收報告](Finish/015-promo-page.md) 與 [素材提示詞](Design/promo/README.md)。
+
+## 共用前台框架與彈窗刷新
+
+首頁、Promo及Godot示範頁共用 FrontendLayout、Header與BottomNav，統一480px最大寬度、72px置頂Header、底部安全區與Wallet／Affiliate／My入口。登入／註冊保留目前布局，項目入口與後台不套用。新增前台內容頁應接入此框架。
+
+歡迎彈窗每次重新整理首頁皆顯示；關閉狀態只保存在本次載入的記憶體中，同次SPA切頁再回首頁不重彈。舊sessionStorage關閉記錄不再使用；其他頁面刷新後首次進入首頁仍會顯示。

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Trophy, ArrowLeft, ArrowRight, ChevronRight, Crown, Flame, Gift, House, Wallet, UsersRound, UserRound, Coins, Gamepad2, UserPlus, Target, X } from 'lucide-react'
+import { Trophy, ArrowRight, ChevronRight, Crown, Flame, Coins, Gamepad2, UserPlus, Target, X } from 'lucide-react'
 import Banner from '../landing/Banner'
 import '../landing/landing.css'
 import './promo.css'
@@ -22,18 +22,16 @@ const slides = [
   { image: 'daily', label: 'DAILY REWARDS · PREVIEW', title: <>Daily<br /><em>Check-in</em></>, description: 'A little reward. A brighter day.', cta: 'Claim Now' },
   { image: 'spin', label: 'WIN BIG · PREVIEW', title: <>Lucky<br /><em>Spin</em></>, description: 'Discover a world of exciting rewards.', cta: 'Join Now' },
 ]
-type Panel = { title: string; text?: string; list?: 'promos' | 'missions' | 'my' }
+type Panel = { title: string; text?: string; list?: 'promos' | 'missions' }
 export default function Promo() {
   const [panel, setPanel] = useState<Panel | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
   const opener = useRef<HTMLElement | null>(null)
-  useEffect(() => { const lang = document.documentElement.lang; document.documentElement.lang = 'en'; document.body.classList.add('kk-body'); return () => { document.documentElement.lang = lang; document.body.classList.remove('kk-body') } }, [])
   useEffect(() => { if (!panel) return; const old = document.body.style.overflow; document.body.style.overflow = 'hidden'; dialog.current?.showModal(); return () => { dialog.current?.close(); document.body.style.overflow = old; if (opener.current?.isConnected) opener.current.focus({ preventScroll: true }) } }, [!!panel])
   function open(next: Panel) { if (!panel) opener.current = document.activeElement as HTMLElement; setPanel(next) }
   const details = (p: { title: string; detail: string }) => open({ title: p.title, text: p.detail })
   const close = () => setPanel(null)
-  return <div className="kk-lobby promo-page">
-    <header className="kk-header"><Link className="kk-back" to="/frontend" aria-label="Back to game lobby"><ArrowLeft size={18} /></Link><Link className="kk-logo" to="/frontend"><span><Crown size={25} /></span><div>KUN<span>KING</span><small>YOUR PLAYGROUND</small></div></Link><div className="promo-auth"><Link to="/login">Log In</Link><Link to="/register">Register</Link></div></header>
+  return <>
     <main className="kk-main promo-main">
       <Banner banners={slides} imageFolder="promo" onExplore={i => details(i === 0 ? welcome : promotions[i - 1])} />
       <section aria-labelledby="featured-title"><div className="promo-section-title"><h2 id="featured-title"><Flame className="promo-fire" size={20} />Featured Promotions</h2><button onClick={() => open({ title: 'All Promotions', list: 'promos' })}>View all<ChevronRight size={13} /></button></div>
@@ -45,7 +43,6 @@ export default function Promo() {
       </section>
       <section className="promo-more"><Trophy className="promo-trophy" size={52} aria-hidden="true" /><img src={`${import.meta.env.BASE_URL}promo/more.webp`} alt="" width="1200" height="240" /><div><h2>More Promotions Await</h2><p>Events, tournaments and exclusive rewards,<br />all in one place!</p></div><button onClick={() => open({ title: 'All Promotions', list: 'promos' })}>Explore All<ArrowRight size={14} /></button></section>
     </main>
-    <nav className="kk-bottom-nav" aria-label="Lobby navigation"><Link to="/frontend"><span><House size={20} /></span>Home</Link><Link to="/promo" className="active" aria-current="page"><span><Gift size={20} /></span>Promo</Link>{[{ label: 'Wallet', icon: Wallet }, { label: 'Affiliate', icon: UsersRound }, { label: 'My', icon: UserRound }].map(({ label, icon: Icon }) => <button key={label} className={label === 'Wallet' ? 'kk-center-nav' : ''} onClick={() => open(label === 'My' ? { title: 'My', list: 'my' } : { title: label, text: label === 'Wallet' ? 'Your wallet will be available when account services launch.' : 'Our affiliate program is coming soon.' })}><span><Icon size={label === 'Wallet' ? 27 : 20} /></span>{label}</button>)}</nav>
-    <dialog className="kk-dialog promo-dialog" ref={dialog} aria-labelledby="promo-dialog-title" onCancel={e => { e.preventDefault(); close() }} onClick={e => { if (e.target === e.currentTarget) close() }}>{panel && <div className="kk-dialog-content"><button className="kk-dialog-close" aria-label="Close promotion panel" onClick={close}><X size={21} /></button><h2 id="promo-dialog-title">{panel.title}</h2>{panel.text && <><p>{panel.text}</p><p className="promo-preview">Preview only. No rewards can be claimed.</p></>}{panel.list === 'promos' && [welcome, ...promotions].map(p => <button className="promo-list-item" key={p.id} onClick={() => details(p)}>{p.title}<ChevronRight size={17} /></button>)}{panel.list === 'missions' && <><p>Demo progress only. Rewards are not available.</p>{missions.map(m => <p key={m.title}>{m.title} · {m.current}/{m.total} · +{m.reward}</p>)}</>}{!panel.list || panel.list === 'my' ? <div className="promo-panel-actions"><Link to="/login">Log In</Link><Link to="/register">Register</Link>{panel.list === 'my' && <Link to="/frontend?favorites=1">My Favorites</Link>}</div> : null}<button className="kk-primary" onClick={close}>Close</button></div>}</dialog>
-  </div>
+    <dialog className="kk-dialog promo-dialog" ref={dialog} aria-labelledby="promo-dialog-title" onCancel={e => { e.preventDefault(); close() }} onClick={e => { if (e.target === e.currentTarget) close() }}>{panel && <div className="kk-dialog-content"><button className="kk-dialog-close" aria-label="Close promotion panel" onClick={close}><X size={21} /></button><h2 id="promo-dialog-title">{panel.title}</h2>{panel.text && <><p>{panel.text}</p><p className="promo-preview">Preview only. No rewards can be claimed.</p></>}{panel.list === 'promos' && [welcome, ...promotions].map(p => <button className="promo-list-item" key={p.id} onClick={() => details(p)}>{p.title}<ChevronRight size={17} /></button>)}{panel.list === 'missions' && <><p>Demo progress only. Rewards are not available.</p>{missions.map(m => <p key={m.title}>{m.title} · {m.current}/{m.total} · +{m.reward}</p>)}</>}{!panel.list ? <div className="promo-panel-actions"><Link to="/login">Log In</Link><Link to="/register">Register</Link></div> : null}<button className="kk-primary" onClick={close}>Close</button></div>}</dialog>
+  </>
 }

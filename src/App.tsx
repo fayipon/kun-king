@@ -4,6 +4,7 @@ import { ArrowUpRight, ArrowLeft, Crown, Gamepad2, LayoutDashboard, Layers3, Box
 import Landing from './landing/Landing'
 import Auth from './auth/Auth'
 import Promo from './promo/Promo'
+import FrontendLayout from './FrontendLayout'
 
 function Home() {
   return <>
@@ -39,9 +40,9 @@ function Frontend() {
       .catch(() => { if (!controller.signal.aborted) setStatus('missing') })
     return () => controller.abort()
   }, [])
-  return <section className="subpage"><Link className="back-link" to="/"><ArrowLeft size={16} />返回項目入口</Link>
-    <div className="eyebrow">PLAYER SPACE</div><h1>你的旅程，從這裡開始。</h1><p>歡迎來到 Kun King 遊戲前台。</p>
-    <div className="game-panel">{started ? <iframe title="Kun King Godot 遊戲" src={gameUrl} allow="fullscreen; autoplay" allowFullScreen /> : <div className="empty-state"><Gamepad2 size={42} /><h2>{status === 'ready' ? '世界已就緒' : status === 'checking' ? '正在確認遊戲資源…' : '遊戲世界，準備中'}</h2><p>{status === 'ready' ? '開啟 Godot 示範場景，開始探索。' : status === 'missing' ? '前台已建立。完成 Godot Web 匯出後，即可在這裡啟動遊戲。' : '請稍候。'}</p>{status === 'ready' && <button onClick={() => setStarted(true)}>啟動遊戲 <ArrowUpRight size={18} /></button>}</div>}</div>
+  return <section className="subpage"><Link className="back-link" to="/frontend"><ArrowLeft size={16} />Back to game lobby</Link>
+    <div className="eyebrow">PLAYER SPACE</div><h1>Your next adventure.</h1><p>Explore the Kun King Godot demo.</p>
+    <div className="game-panel">{started ? <iframe title="Kun King Godot game" src={gameUrl} allow="fullscreen; autoplay" allowFullScreen /> : <div className="empty-state"><Gamepad2 size={42} /><h2>{status === 'ready' ? 'Ready to play' : status === 'checking' ? 'Checking game resources…' : 'Coming soon'}</h2><p>{status === 'ready' ? 'Open the Godot demo and start exploring.' : status === 'missing' ? 'The demo will be available after the Godot Web export is published.' : 'Please wait.'}</p>{status === 'ready' && <button onClick={() => setStarted(true)}>Start game <ArrowUpRight size={18} /></button>}</div>}</div>
   </section>
 }
 
@@ -56,8 +57,7 @@ export default function App() {
   const { pathname } = useLocation()
   useEffect(() => { document.title = `Kun King · ${pathname === '/' ? '項目入口' : pathname === '/promo' ? 'Promotions' : pathname === '/frontend' ? 'Game Lobby' : pathname === '/login' ? 'Log In' : pathname === '/register' ? 'Create Account' : pathname === '/play' ? 'Godot 示範' : pathname === '/admin' ? '管理後台' : '找不到頁面'}`; window.scrollTo(0, 0) }, [pathname])
   if (pathname === '/login' || pathname === '/register') return <Auth key={pathname} register={pathname === '/register'} />
-  if (pathname === '/promo') return <Promo />
-  if (pathname === '/frontend') return <Landing />
+  if (['/frontend','/promo','/play'].includes(pathname)) return <FrontendLayout>{pathname === '/promo' ? <Promo /> : pathname === '/frontend' ? <Landing /> : <main className="kk-main frontend-game"><Frontend /></main>}</FrontendLayout>
   return <div className="app-shell"><header><Link className="brand" to="/" aria-label="Kun King 首頁"><span className="brand-mark"><Crown size={22} /></span>KUN KING<span className="brand-divider" /><span className="brand-caption">項目空間</span></Link><nav aria-label="主要導覽"><NavLink to="/" end>項目入口</NavLink><span className="version">V 0.1</span></nav></header>
     <main><Routes><Route path="/" element={<Home />} /><Route path="/play" element={<Frontend />} /><Route path="/admin" element={<Admin />} /><Route path="*" element={<section className="subpage"><h1>找不到這個頁面。</h1><Link className="back-link" to="/">返回項目入口 <ArrowUpRight size={18} /></Link></section>} /></Routes></main>
     <footer><span>© {new Date().getFullYear()} Kun King</span><span className="footer-tag">一個世界，無限可能。<span className="tiny-star">✳</span></span><span>BUILT WITH REACT + GODOT</span></footer>
