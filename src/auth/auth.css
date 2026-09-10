@@ -43,3 +43,8 @@
 @media(min-width:600px) { .auth-page { margin-top: 0; margin-bottom: 0; border-radius: 24px;  }.auth-hero { height: 240px; } }
 @media(max-width:360px) { .auth-header { padding: 0 18px; height: 72px; }.auth-brand > div { font-size: 20px; }.auth-brand > span { width: 37px; height: 40px; }.auth-motto { letter-spacing: 1px; font-size: 5px; }.auth-motto i { padding: 0 2px; }.auth-main { padding: 0 16px; }.auth-panel { padding: 23px 18px 18px; }.auth-panel-title h1 { font-size: 29px; }.auth-panel-title p { font-size: 12px; }.auth-hero h1 { font-size: 42px; }.auth-options { font-size: 10px; }.auth-divider { gap: 10px; }.auth-register .auth-hero { height: 210px; } }
 @media(prefers-reduced-motion:reduce) { .auth-page *, .auth-page *::before, .auth-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+.auth-header-actions { display:flex; align-items:center; gap:12px; }
+.auth-close { display:grid; place-items:center; flex-shrink:0; width:36px; height:36px; border-radius:50%; color:#f1f7f5; background:#07151c80; text-decoration:none; }
+.auth-close:hover { color:var(--aqua); background:#14362f; }
+@media(max-width:480px) { .auth-header-actions .auth-motto { display:none; } }

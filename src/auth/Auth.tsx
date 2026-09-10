@@ -61,7 +61,7 @@ export default function Auth({ register }: { register: boolean }) {
   }
   return <div className={`auth-page ${register ? 'auth-register' : 'auth-login'}`}>
     <div className="auth-art" aria-hidden="true"><div className="auth-glow purple" /><div className="auth-glow mint" /></div>
-    <header className="auth-header"><Link to="/frontend" className="auth-brand" aria-label="Kun King game lobby"><span><Crown size={27} /></span><div>KUN<b>KING</b><small>YOUR PLAYGROUND</small></div></Link><span className="auth-motto">PLAY <i>•</i> WIN <i>•</i> BELONG</span></header>
+    <header className="auth-header"><Link to="/frontend" className="auth-brand" aria-label="Kun King game lobby"><span><Crown size={27} /></span><div>KUN<b>KING</b><small>YOUR PLAYGROUND</small></div></Link><div className="auth-header-actions"><span className="auth-motto">PLAY <i>•</i> WIN <i>•</i> BELONG</span><Link className="auth-close" to="/frontend" aria-label="Back to game lobby"><X size={21} aria-hidden="true" /></Link></div></header>
     <main className="auth-main">
       <section className="auth-hero" aria-label={register ? 'Create your account' : 'Welcome to Kun King'}>{register ? <><h1>Create<br /><em>Account</em></h1><p>Get in. Play more.<br />A bigger playground awaits.</p></> : <p className="auth-tagline">Good games.<br /><em>Brighter days.</em></p>}</section>
       {register && <ol className="auth-steps" aria-label="Registration steps">{[['Create Account', 'Quick & Easy'], ['Verify Account', 'Secure Your Play'], ['Start Playing', 'Explore & Enjoy']].map(([title, text], i) => <li key={title} aria-current={i === 0 ? 'step' : undefined}><span>{i + 1}</span><strong>{title}</strong><small>{text}</small></li>)}</ol>}

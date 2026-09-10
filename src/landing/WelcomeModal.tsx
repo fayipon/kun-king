@@ -34,6 +34,7 @@ export default function WelcomeModal() {
     <button className="kk-welcome-trigger" ref={trigger} onClick={() => { returnTo.current = trigger.current; setOpen(true) }}><Gift size={15} />Welcome Rewards</button>
     <dialog className="kk-welcome-dialog" ref={dialog} aria-labelledby="welcome-title" aria-describedby="welcome-description" onCancel={event => { event.preventDefault(); dismiss() }} onClick={event => { if (event.target === event.currentTarget) dismiss() }}>
       <div className="kk-welcome-stage">
+        <svg width="0" height="0" className="kk-welcome-filter" aria-hidden="true"><defs><filter id="welcome-clean-alpha" colorInterpolationFilters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="6" intercept="-5" /></feComponentTransfer></filter></defs></svg>
         <img className="kk-welcome-mascot" src={`${import.meta.env.BASE_URL}welcome/chicken-gifts.webp`} alt="" width="720" height="480" />
         <div className="kk-welcome-frame"><div className="kk-welcome-content">
           <button className="kk-welcome-close" aria-label="Close welcome" autoFocus onClick={dismiss}><X size={18} /></button>

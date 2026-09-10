@@ -2,7 +2,7 @@
 .kk-welcome-dialog { width: min(400px,calc(100vw - 24px)); max-width: none; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); margin: auto; border: 0; padding: 8px; background: transparent; color: #f1f7f5; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #5df5c266 transparent; }
 .kk-welcome-dialog::backdrop { background: #02090dba; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .kk-welcome-stage { position: relative; padding-top: 116px; text-align: left; }
-.kk-welcome-mascot { position: absolute; width: 245px; height: auto; top: 0; right: 2px; z-index: 2; pointer-events: none; filter: drop-shadow(0 3px 12px #c542ef24); }
+.kk-welcome-mascot { position: absolute; width: 245px; height: auto; top: 0; right: 2px; z-index: 2; pointer-events: none; filter: url(#welcome-clean-alpha); }
 .kk-welcome-frame { position: relative; padding: 1.5px; border-radius: 20px; background: linear-gradient(120deg,#5df5c2,#4bded9,#b844f4,#de9dff,#5df5c2); background-size: 300% 300%; box-shadow: 0 0 16px #5df5c22c,0 0 24px #b844f426; animation: welcome-border 9s ease-in-out infinite; }
 @keyframes welcome-border { 0%,100% { background-position: 0% 50%; box-shadow: 0 0 16px #5df5c22c,0 0 24px #b844f426; } 50% { background-position: 100% 50%; box-shadow: 0 0 16px #b844f43a,0 0 24px #5df5c226; } }
 .kk-welcome-content { padding: 23px 22px 18px; border-radius: 18.5px; background: radial-gradient(ellipse at top right,#34124599,transparent 55%),linear-gradient(135deg,#112b2c,#08121e 65%,#031018); }
@@ -18,3 +18,5 @@
 @media(max-width:360px) { .kk-welcome-content { padding: 22px 15px 15px; }.kk-welcome-content h2 { font-size: 23px; }.kk-welcome-mascot { width: 220px; }.kk-welcome-stage { padding-top: 105px; }.kk-welcome-perks { gap: 5px; }.kk-welcome-perk strong { font-size: 8px; } }
 @media(max-height:600px) { .kk-welcome-stage { padding-top: 70px; }.kk-welcome-mascot { width: 180px; }.kk-welcome-brand { margin-bottom: 14px; } }
 @media(prefers-reduced-motion:reduce) { .kk-welcome-frame { animation: none; } }
+
+.kk-welcome-filter { position: absolute; pointer-events: none; }
