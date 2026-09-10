@@ -157,3 +157,11 @@ public/game/         Godot Web 匯出輸出位置
 首頁、Promo及Godot示範頁共用 FrontendLayout、Header與BottomNav，統一480px最大寬度、72px置頂Header、底部安全區與Wallet／Affiliate／My入口。登入／註冊保留目前布局，項目入口與後台不套用。新增前台內容頁應接入此框架。
 
 歡迎彈窗每次重新整理首頁皆顯示；關閉狀態只保存在本次載入的記憶體中，同次SPA切頁再回首頁不重彈。舊sessionStorage關閉記錄不再使用；其他頁面刷新後首次進入首頁仍會顯示。
+
+## My 帳戶預覽
+
+[My頁](https://fayipon.github.io/kun-king/#/my)依Design/kunking_my_reference_aligned.png實作，包含個人資料、VIP進度、期間統計、帳戶選單與遊戲紀錄。底部My開啟獨立頁，共用Header在My顯示通知／設定；登入、註冊與收藏位於個人資料面板。
+
+帳戶狀態、金額與紀錄均為示範；未串接帳戶、2FA、KYC或金流。複製ID有成功／失敗提示，Log Out確認後離開預覽返回登入，不清除收藏。
+
+前台共用內容起點（上14px／左右16px）與穩定捲軸空間，固定導覽使用相同置中基準，路由切換在繪製前回頂部，減少Home／Promo切換位移。

@@ -4,3 +4,7 @@
 .frontend-game .subpage { padding:16px 0; }.frontend-game .subpage h1 { font-size:28px; }.frontend-game .game-panel { width:100%; }.frontend-game iframe { width:100%; border:0; min-height:360px; }
 @media(max-width:360px) { .frontend-layout .kk-header { padding:0 10px; gap:5px; }.frontend-layout .kk-logo > div { font-size:16px; } }
 .frontend-game .game-panel { background:#132d30; border:1px solid #325048; color:#f1f7f5; }.frontend-game .empty-state h2 { color:#f1f7f5; }.frontend-game .empty-state > svg { color:var(--mint); }.frontend-game .empty-state button { background:var(--mint); color:#08251f; padding:12px 20px; border-radius:8px; }
+html.frontend-document { scrollbar-gutter:stable; scroll-behavior:auto; }
+.frontend-layout .kk-main { padding:14px 16px 0; }
+.frontend-layout .kk-bottom-nav { left:0; right:0; margin-inline:auto; transform:none; }
+.my-header-actions a { position:relative; display:grid; place-items:center; min-width:36px; min-height:44px; color:#8da6ad; }.my-header-actions i { position:absolute; top:10px; right:7px; width:5px; height:5px; border-radius:50%; background:var(--mint); }

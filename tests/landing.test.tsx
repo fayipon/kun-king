@@ -4,13 +4,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { HashRouter } from 'react-router-dom'
 import Banner from '../src/landing/Banner'
-import Landing from '../src/landing/Landing'
+import App from '../src/App'
 import { favoriteKey, readFavorites } from '../src/landing/games'
 
 let reduced = false
 let motionListeners: Set<() => void>
 beforeEach(() => {
-  window.history.replaceState(null, "", "/")
+  window.history.replaceState(null, "", "/#/frontend")
   reduced = false
   motionListeners = new Set()
   vi.stubGlobal('matchMedia', () => ({ get matches() { return reduced }, addEventListener: (_: string, fn: () => void) => motionListeners.add(fn), removeEventListener: (_: string, fn: () => void) => motionListeners.delete(fn) }))
@@ -116,9 +116,9 @@ describe('Banner behavior', () => {
 })
 
 describe('Lobby categories and navigation', () => {
-  const mount = () => render(<HashRouter><FrontendLayout><Landing /></FrontendLayout></HashRouter>)
+  const mount = () => render(<HashRouter><App/></HashRouter>)
   const cards = (region: HTMLElement) => within(region).queryAllByRole('button', { name: /^View (?!all )/ }).map(e => e.getAttribute('aria-label'))
-  const favorites = () => { fireEvent.click(screen.getByRole('button', { name: 'My', exact: true })); fireEvent.click(screen.getByRole('button', { name: 'My Favorites', exact: true })) }
+  const favorites = () => { fireEvent.click(screen.getByRole('button', { name: 'My', exact: true })); fireEvent.click(screen.getByRole('button', { name: 'Edit profile' })); fireEvent.click(screen.getByRole('link', { name: 'My Favorites', exact: true })) }
   it('keeps all five section titles and expanded game order identical to individual categories', () => {
     mount()
     const names = ['Hot', 'Perya', 'Popular', 'New', 'Feature']
@@ -160,10 +160,11 @@ describe('Lobby categories and navigation', () => {
       expect(document.activeElement).toBe(nav.getByRole('button', { name }))
     }
     fireEvent.click(nav.getByRole('button', { name: 'My' }))
-    const panel = within(screen.getByRole('dialog', { name: 'My' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Edit profile' }))
+    const panel = within(screen.getByRole('dialog', { name: 'Personal information' }))
     expect(panel.getByRole('link', { name: 'Log In' }).getAttribute('href')).toBe('#/login')
     expect(panel.getByRole('link', { name: 'Register' }).getAttribute('href')).toBe('#/register')
-    fireEvent.click(panel.getByRole('button', { name: 'My Favorites' }))
+    fireEvent.click(panel.getByRole('link', { name: 'My Favorites' }))
     expect(screen.getByText('Keep your favorites close.')).toBeTruthy()
     expect(screen.queryByRole('textbox')).toBeNull()
   })

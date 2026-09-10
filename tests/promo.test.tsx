@@ -58,7 +58,7 @@ it('uses Promo content when switching banners and cleans up dialog before login'
 
 it('shares one header and nav on every frontend content route, excludes auth and portal', async () => {
   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:false,headers:new Headers()}))
-  for (const route of ['/frontend','/promo','/play']) {
+  for (const route of ['/frontend','/promo','/my','/play']) {
     const view=mount(route)
     expect(document.querySelectorAll('.kk-header').length).toBe(1)
     expect(screen.getAllByRole('navigation',{name:'Lobby navigation'}).length).toBe(1)
@@ -72,7 +72,7 @@ it('shares one header and nav on every frontend content route, excludes auth and
   }
 })
 it('changes same-page favorites through the common My panel and Home resets them', () => {
-  mount('/frontend');fireEvent.click(screen.getByRole('button',{name:'My',exact:true}));fireEvent.click(screen.getByRole('button',{name:'My Favorites',exact:true}));
+  mount('/frontend');fireEvent.click(screen.getByRole('button',{name:'My',exact:true}));fireEvent.click(screen.getByRole('button',{name:'Edit profile'}));fireEvent.click(screen.getByRole('link',{name:'My Favorites',exact:true}));
   expect(screen.getByRole('region',{name:'My Favorites',exact:true})).toBeTruthy();fireEvent.click(screen.getByRole('button',{name:'Home',exact:true}));
   expect(screen.getByRole('region',{name:'Hot',exact:true})).toBeTruthy()
 })
