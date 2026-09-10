@@ -2,7 +2,7 @@
 
 - 日期：2026-09-10
 - 計畫：[Plans/011](../Plans/011-navigation-catalog-consistency.md)
-- 狀態：本機完成，待部署。
+- 狀態：已完成，線上驗收通過。
 
 ## 完成範圍
 
@@ -17,8 +17,10 @@
 - N05：Perya 在兩種模式皆使用相同準備中內容。
 - N06：各分類及收藏無搜尋輸入或Open search入口；Banner View picks 選中Popular測試通過。
 - N07：320／390／430／1280px均無水平溢出，底部文字無截斷；390px截圖檢視導覽及My面板通過。
-- N08：npm test共15項通過；npm run build及git diff --check通過；線上待驗證。
+- N08：npm test共15項通過；npm run build及git diff --check通過；線上確認五個導覽、ALL五分區、單分類Hot16 GAMES、My面板及搜尋移除。
 
 ## 限制
 
 未提供真實登入、錢包、活動及推薦服務；面板如實顯示準備中。Popular與Feature沿用相同展示集合。手機以桌面viewport模擬，未使用實體裝置。
+
+版本 `fe229fd`，[GitHub Actions](https://github.com/fayipon/kun-king/actions/runs/34477512219) success。
