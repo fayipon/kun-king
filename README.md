@@ -80,7 +80,7 @@ npm test         # 輪播、搜尋、分類及收藏互動測試
 
 遊戲可搜尋、依展示分類篩選、展開更多卡片，並在資訊面板加入收藏。收藏使用瀏覽器 localStorage 保存，不跨裝置同步；目前各遊戲只展示資訊，尚未串接實際遊戲。人氣與新作為示範編排。
 
-Banner 下方直接呈現五分類：ALL、Hot、Perya、Popular、New。Hot 沿用熱門展示集合，Popular 為精選集合，New 為新作集合；Perya 尚無確認的遊戲資料，顯示英文準備中提示，可返回 ALL。詳見 [五分類計畫](Plans/005-lobby-categories.md)。
+Banner 下方直接呈現六分類：ALL、Hot、Perya、Popular、New、Feature。Hot 沿用熱門展示集合，Popular 與 Feature 目前共用精選集合，New 為新作集合；Perya 尚無確認的遊戲資料，顯示英文準備中提示，可返回 ALL。詳見 [五分類計畫](Plans/005-lobby-categories.md)。
 
 - 原始遊戲圖：`Design/games/`，共 134 張，保留原檔；目前挑選 32 張作為展示資料。
 - 前端封面：`public/games/`，320px WebP，依可見區域延遲載入。
@@ -115,3 +115,5 @@ public/game/         Godot Web 匯出輸出位置
 ```
 
 首頁採繁體中文、柔和綠色與米色視覺，支援桌機和手機。字型透過 Google Fonts 載入，離線時使用系統字型。
+
+分類切換使用 300ms 選中背景滑移、圖示上提及縮放、光暈與文字顏色轉場；減少動態效果設定下即時切換。詳見 [分類轉場計畫](Plans/006-feature-category-motion.md)。

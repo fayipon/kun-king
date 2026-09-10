@@ -113,12 +113,31 @@ describe('Banner behavior', () => {
 
 describe('Landing discovery and persistence', () => {
   const mount = () => render(<HashRouter><Landing /></HashRouter>)
-  it('switches the five categories, recovers from Perya, and connects the banner to Popular', () => {
+  it('filters Feature searches and clears the category highlight in Favorites', () => {
+    mount()
+    const group = screen.getByRole('group', { name: 'Game categories' })
+    for (const name of ['New', 'Popular', 'Perya', 'Feature', 'Feature']) fireEvent.click(within(group).getByRole('button', { name, exact: true }))
+    expect(within(group).getByRole('button', { name: 'Feature' }).getAttribute('aria-pressed')).toBe('true')
+    fireEvent.click(screen.getByRole('button', { name: 'Open search' }))
+    const input = screen.getByRole('textbox', { name: 'Search games' })
+    fireEvent.change(input, { target: { value: 'Fortune Ox' } })
+    expect(screen.getByRole('button', { name: 'View Fortune Ox' })).toBeTruthy()
+    fireEvent.change(input, { target: { value: 'Mahjong Ways' } })
+    expect(screen.getByText('No games found')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Clear search' }))
+    expect(screen.getByRole('button', { name: 'View Fortune Ox' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Favorites', exact: true }))
+    expect(group.getAttribute('data-selected')).toBe('false')
+    expect(within(group).getAllByRole('button').every(button => button.getAttribute('aria-pressed') === 'false')).toBe(true)
+    fireEvent.click(within(group).getByRole('button', { name: 'ALL', exact: true }))
+    expect(group.getAttribute('data-selected')).toBe('true')
+  })
+  it('switches the six categories, recovers from Perya, and connects the banner to Popular', () => {
     mount()
     const group = within(screen.getByRole('group', { name: 'Game categories' }))
-    expect(group.getAllByRole('button').map(button => button.textContent)).toEqual(['ALL', 'Hot', 'Perya', 'Popular', 'New'])
+    expect(group.getAllByRole('button').map(button => button.textContent)).toEqual(['ALL', 'Hot', 'Perya', 'Popular', 'New', 'Feature'])
     expect(screen.queryByText('Your next favorite is here.')).toBeNull()
-    for (const name of ['Hot', 'Popular', 'New']) {
+    for (const name of ['Hot', 'Popular', 'New', 'Feature']) {
       fireEvent.click(group.getByRole('button', { name, exact: true }))
       expect(group.getByRole('button', { name, exact: true }).getAttribute('aria-pressed')).toBe('true')
       expect(screen.getAllByRole('button', { name: /^View (?!all |picks$)/ }).length).toBeGreaterThan(0)

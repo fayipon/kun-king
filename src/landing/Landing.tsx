@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Compass, Crown, Dices, Flame, Gamepad2, Grid2X2, Heart, House, Info, Search, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BadgeCheck, ChevronDown, ChevronRight, Compass, Crown, Dices, Flame, Gamepad2, Grid2X2, Heart, House, Info, Search, Sparkles, X } from 'lucide-react'
 import Banner from './Banner'
 import { favoriteKey, games, readFavorites } from './games'
 import type { Game } from './games'
 import './landing.css'
 
-type Filter = 'all' | 'hot' | 'new' | 'popular' | 'perya' | 'favorites'
+type Filter = 'all' | 'hot' | 'new' | 'popular' | 'perya' | 'featured' | 'favorites'
 const categories = [
   { id: 'all', label: 'ALL', icon: Gamepad2 },
   { id: 'hot', label: 'Hot', icon: Flame },
   { id: 'perya', label: 'Perya', icon: Dices },
   { id: 'popular', label: 'Popular', icon: Crown },
   { id: 'new', label: 'New', icon: Sparkles },
+  { id: 'featured', label: 'Feature', icon: BadgeCheck },
 ] as const
 
 export default function Landing() {
@@ -62,7 +64,7 @@ export default function Landing() {
   function toggleFavorite(id: string) { setFavorites(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id]) }
 
   const filtered = games.filter(game => {
-    const matchFilter = filter === 'all' || (filter === 'hot' && !game.fresh) || (filter === 'new' && game.fresh) || (filter === 'popular' && game.featured) || (filter === 'perya' && game.perya) || (filter === 'favorites' && favorites.includes(game.id))
+    const matchFilter = filter === 'all' || (filter === 'hot' && !game.fresh) || (filter === 'new' && game.fresh) || ((filter === 'popular' || filter === 'featured') && game.featured) || (filter === 'perya' && game.perya) || (filter === 'favorites' && favorites.includes(game.id))
     return matchFilter && game.name.toLowerCase().includes(query.trim().toLowerCase())
   })
   const allSections = filter === 'all' && !query.trim()
@@ -78,8 +80,8 @@ export default function Landing() {
     <main className="kk-main">
       {searchOpen && <div className="kk-search"><Search size={17} /><input ref={search} aria-label="Search games" placeholder="Find your next favorite…" value={query} onChange={event => { setQuery(event.target.value); setExpanded([]) }} />{query && <button aria-label="Clear search" onClick={() => { setQuery(''); search.current?.focus() }}><X size={17} /></button>}</div>}
       <Banner onExplore={index => { choose(index === 1 ? 'popular' : index === 2 ? 'new' : 'all'); setQuery(''); scrollTo(catalog.current) }} />
-      <div ref={categoryBar} className="kk-categories" role="group" aria-label="Game categories">
-        {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={23} /></span>{label}</button>)}
+      <div ref={categoryBar} className="kk-categories" data-selected={categories.findIndex(category => category.id === filter) >= 0} style={{ '--category-index': Math.max(0, categories.findIndex(category => category.id === filter)) } as CSSProperties} role="group" aria-label="Game categories">
+        {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={21} /></span>{label}</button>)}
       </div>
       <section className="kk-catalog" ref={catalog} aria-label="Game catalog">
         {sections.map(({ id, title, subtitle, icon: Icon, items }) => <section className="kk-game-section" key={id} aria-label={title}>
