@@ -126,6 +126,8 @@ public/game/         Godot Web 匯出輸出位置
 
 前台 Header 提供 Log In／Register，分別前往 [登入](https://fayipon.github.io/kun-king/#/login) 與 [註冊](https://fayipon.github.io/kun-king/#/register)。使用既有 HashRouter；GitHub Pages 分享網址需保留 #。
 
-兩頁採原創遊戲熊背景、玻璃表單與紫色／青綠呼吸光暈；減少動態效果設定下停用動畫。素材與提示詞見 [Design/auth](Design/auth/README.md)。首頁搜尋移至第一個遊戲列表標題旁，分類與第一個標題間距為 8px。
+兩頁採使用者參考圖編輯的霓虹遊戲雞背景、玻璃表單與紫色／青綠呼吸光暈；減少動態效果設定下停用動畫。素材與提示詞見 [Design/auth](Design/auth/README.md)。首頁搜尋移至第一個遊戲列表標題旁，分類與第一個標題間距為 8px。
 
 目前未連接驗證 API、OAuth、忘記密碼及正式條款服務。表單只做前端驗證並顯示英文未連接提示，不建立帳號或登入 session；密碼不寫入儲存空間。Remember me 只保存識別名稱至本機，取消勾選即移除。社群、忘記密碼與條款入口提供可關閉的說明面板。
+
+登入與註冊背景頂部對齊、不重複鋪排，圖片外側及底部延伸為純黑；表單沿用原玻璃框。舊熊素材保留作為設計紀錄。

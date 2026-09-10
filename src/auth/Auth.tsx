@@ -60,7 +60,7 @@ export default function Auth({ register }: { register: boolean }) {
     </div>
   }
   return <div className={`auth-page ${register ? 'auth-register' : 'auth-login'}`}>
-    <div className="auth-art" aria-hidden="true" /><div className="auth-glow purple" aria-hidden="true" /><div className="auth-glow mint" aria-hidden="true" />
+    <div className="auth-art" aria-hidden="true"><div className="auth-glow purple" /><div className="auth-glow mint" /></div>
     <header className="auth-header"><Link to="/frontend" className="auth-brand" aria-label="Kun King game lobby"><span><Crown size={27} /></span><div>KUN<b>KING</b><small>YOUR PLAYGROUND</small></div></Link><span className="auth-motto">PLAY <i>•</i> WIN <i>•</i> BELONG</span></header>
     <main className="auth-main">
       <section className="auth-hero" aria-label={register ? 'Create your account' : 'Welcome to Kun King'}>{register ? <><h1>Create<br /><em>Account</em></h1><p>Get in. Play more.<br />A bigger playground awaits.</p></> : <p className="auth-tagline">Good games.<br /><em>Brighter days.</em></p>}</section>
