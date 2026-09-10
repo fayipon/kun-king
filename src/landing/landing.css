@@ -143,3 +143,5 @@
 .kk-list-tools { display: flex; align-items: center; gap: 10px; }
 .kk-list-tools > button:first-child { min-width: 30px; min-height: 36px; }
 @media(max-width:360px) { .kk-auth-links { gap: 2px; }.kk-auth-links a { padding: 0 7px; font-size: 10px; } }
+
+.kk-nav-dialog .kk-dialog-content { padding-top: 40px; }.kk-account-actions { display: grid; gap: 12px; }.kk-account-actions a { text-decoration: none; }.kk-nav-dialog .kk-primary { width: 100%; justify-content: center; }

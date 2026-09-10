@@ -80,7 +80,7 @@ npm test         # 輪播、搜尋、分類及收藏互動測試
 
 2026-09-10 已部署並驗收，詳見 [手機版前台驗收及測試報告](Finish/003-mobile-frontend-landing.md)。
 
-遊戲可搜尋、依展示分類篩選、展開更多卡片，並在資訊面板加入收藏。收藏使用瀏覽器 localStorage 保存，不跨裝置同步；目前各遊戲只展示資訊，尚未串接實際遊戲。人氣與新作為示範編排。
+遊戲可依展示分類篩選、展開更多卡片，並在資訊面板加入收藏。收藏使用瀏覽器 localStorage 保存，不跨裝置同步；目前各遊戲只展示資訊，尚未串接實際遊戲。人氣與新作為示範編排。
 
 Banner 下方直接呈現六分類：ALL、Hot、Perya、Popular、New、Feature。Hot 沿用熱門展示集合，Popular 與 Feature 目前共用精選集合，New 為新作集合；Perya 尚無確認的遊戲資料，顯示英文準備中提示，可返回 ALL。詳見 [五分類計畫](Plans/005-lobby-categories.md)。
 
@@ -126,10 +126,16 @@ public/game/         Godot Web 匯出輸出位置
 
 前台 Header 提供 Log In／Register，分別前往 [登入](https://fayipon.github.io/kun-king/#/login) 與 [註冊](https://fayipon.github.io/kun-king/#/register)。使用既有 HashRouter；GitHub Pages 分享網址需保留 #。
 
-兩頁採使用者參考圖編輯的霓虹遊戲雞背景、玻璃表單與紫色／青綠呼吸光暈；減少動態效果設定下停用動畫。素材與提示詞見 [Design/auth](Design/auth/README.md)。首頁搜尋移至第一個遊戲列表標題旁，分類與第一個標題間距為 8px。
+兩頁採使用者參考圖編輯的霓虹遊戲雞背景、玻璃表單與紫色／青綠呼吸光暈；減少動態效果設定下停用動畫。素材與提示詞見 [Design/auth](Design/auth/README.md)。未登入首頁不顯示搜尋入口，分類與第一個標題間距為 8px。
 
 目前未連接驗證 API、OAuth、忘記密碼及正式條款服務。表單只做前端驗證並顯示英文未連接提示，不建立帳號或登入 session；密碼不寫入儲存空間。Remember me 只保存識別名稱至本機，取消勾選即移除。社群、忘記密碼與條款入口提供可關閉的說明面板。
 
 登入與註冊背景頂部對齊、不重複鋪排，圖片外側及底部延伸為純黑；表單沿用原玻璃框。舊熊素材保留作為設計紀錄。
 
 登入與註冊介面以首頁薄荷綠 #5df5c2 為主色，搭配綠灰面板；頁面上下外距及底部額外padding已移除，表單內部間距保留。
+
+## 前台導覽與分類一致性
+
+底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo／Wallet／Affiliate 提供準備中說明，My 提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
+
+目前無真實登入狀態，公開前台不顯示搜尋圖示或搜尋框；待接上帳號服務再提供登入後搜尋。詳見 [Plans/011](Plans/011-navigation-catalog-consistency.md)。
