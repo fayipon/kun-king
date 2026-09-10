@@ -2,7 +2,7 @@
 
 - 日期：2026-09-10
 - 計畫：[Plans/006](../Plans/006-feature-category-motion.md)
-- 狀態：本機完成，待部署驗證。
+- 狀態：已完成實作與線上部署；F07 實測限制如下。
 
 ## 實作
 
@@ -20,8 +20,14 @@
 | F06 | 通過：瀏覽器 Enter 切換 ALL，焦點外框為 solid |
 | F07 | 部分驗證：已檢查 reduced-motion CSS，transition 為 none、選中圖示 transform 為 none；本輪未在瀏覽器切換作業系統偏好實測 |
 | F08 | 通過：320／390／430／1280px 六項 y 座標一致，按鈕高度 72px，文字無截斷，無水平溢出 |
-| F09 | 本機通過：npm test 14 項通過，npm run build 與 git diff --check 通過；線上待驗證 |
+| F09 | 本機通過：npm test 14 項通過，npm run build 與 git diff --check 通過；線上通過：六分類、Feature 22 GAMES、快速切換及動畫樣式皆已確認 |
 
 ## 限制
 
 手機尺寸以瀏覽器 viewport 模擬，未使用實體手機；Perya 延續既有準備中提示。Feature 與 Popular 依核准計畫共用精選集合。
+
+## 部署
+
+- 版本：`78a8f71`，已 push 至 main。
+- [GitHub Actions](https://github.com/fayipon/kun-king/actions/runs/34469742343)：success。
+- [正式網站](https://fayipon.github.io/kun-king/#/frontend)：已確認六分類、快速切換後 Feature 狀態、300ms 背景轉場及 Icon 上提縮放。
