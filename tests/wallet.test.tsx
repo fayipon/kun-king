@@ -15,7 +15,7 @@ afterEach(()=>{cleanup();vi.restoreAllMocks();vi.unstubAllGlobals()})
 const mount=(path='/wallet')=>render(<MemoryRouter initialEntries={[path]}><App/></MemoryRouter>)
 it('routes from My wallet entry and uses the public shared header and selected nav',()=>{
   mount('/my');fireEvent.click(screen.getByRole('button',{name:'Wallet & transactions'}))
-  expect(screen.getByRole('heading',{name:'Wallet',exact:true})).toBeTruthy()
+  expect(screen.getByRole('region',{name:'Wallet balances'})).toBeTruthy()
   expect(screen.getByRole('button',{name:'Wallet',exact:true}).getAttribute('aria-current')).toBe('page')
   expect(within(screen.getByRole('banner')).getByRole('link',{name:'Register'})).toBeTruthy()
 })

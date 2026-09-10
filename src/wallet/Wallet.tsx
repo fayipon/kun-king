@@ -45,7 +45,6 @@ export default function Wallet() {
   const visibleMoney = (value:number) => hidden ? '••••••' : money(value)
 
   return <main className="kk-main wallet-main">
-    <div className="wallet-heading"><div><h1>Wallet</h1><p>Your money, all in one place.</p></div><span className="wallet-preview">PREVIEW</span></div>
     <section className="wallet-balance wallet-card" aria-label="Wallet balances">
       <div className="wallet-total-label"><span>Total balance</span><button aria-label={hidden ? 'Show balances' : 'Hide balances'} aria-pressed={hidden} onClick={() => setHidden(!hidden)}>{hidden ? <EyeOff size={17}/> : <Eye size={17}/>}</button><span className="wallet-currency">PHP</span></div>
       <strong className="wallet-total">{visibleMoney(balances.cash + balances.promo)}</strong>

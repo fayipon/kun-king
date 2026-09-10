@@ -63,7 +63,7 @@ it('shares one header and nav on every frontend content route, excludes auth and
     expect(document.querySelectorAll('.kk-header').length).toBe(1)
     expect(screen.getAllByRole('navigation',{name:'Lobby navigation'}).length).toBe(1)
     fireEvent.click(screen.getByRole('button',{name:'Wallet',exact:true}))
-    expect(screen.getByRole('heading',{name:'Wallet',exact:true})).toBeTruthy()
+    expect(screen.getByRole('region',{name:'Wallet balances'})).toBeTruthy()
     view.unmount()
   }
   for(const route of ['/login','/register','/','/admin']) {

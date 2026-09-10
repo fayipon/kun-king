@@ -1,5 +1,4 @@
-.wallet-main h1,.wallet-main h2,.wallet-main h3 { margin:0; letter-spacing:-.4px; }
-.wallet-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:6px 0 21px; }.wallet-heading h1 { font-size:25px; }.wallet-heading p { margin:7px 0 0; }
+.wallet-main h2,.wallet-main h3 { margin:0; letter-spacing:-.4px; }
 .wallet-preview,.wallet-currency { border:1px solid #30474f; border-radius:4px; color:#8a9fa8; padding:4px 7px; font-size:9px; letter-spacing:1px; white-space:nowrap; }
 .wallet-card { background:linear-gradient(120deg,#192e36,#182b32); border:1px solid #2b414a; border-radius:13px; }
 .wallet-balance { padding:18px; }.wallet-total-label { display:flex; align-items:center; gap:8px; color:#92a8b0; }.wallet-total-label button { display:grid; place-items:center; min-width:28px; min-height:30px; color:#8daab2; }.wallet-currency { margin-left:auto; }.wallet-total { display:block; font-size:34px; letter-spacing:-1px; font-variant-numeric:tabular-nums; margin:7px 0 25px; }
