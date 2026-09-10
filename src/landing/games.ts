@@ -1,4 +1,4 @@
-export type Game = { id: string; name: string; image: string; featured: boolean; fresh: boolean }
+export type Game = { id: string; name: string; image: string; featured: boolean; fresh: boolean; perya: boolean }
 
 // Display names transcribed from supplied covers; categories are editorial demo selections.
 const catalog: [string, string][] = [
@@ -17,7 +17,7 @@ const catalog: [string, string][] = [
 
 export const games: Game[] = catalog.map(([id, name], index) => ({
   id, name, image: `${import.meta.env.BASE_URL}games/${id}.webp`,
-  featured: index % 3 !== 2, fresh: index >= 16,
+  featured: index % 3 !== 2, fresh: index >= 16, perya: false,
 }))
 
 export const favoriteKey = 'kun-king:favorites:v1'

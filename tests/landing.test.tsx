@@ -113,6 +113,29 @@ describe('Banner behavior', () => {
 
 describe('Landing discovery and persistence', () => {
   const mount = () => render(<HashRouter><Landing /></HashRouter>)
+  it('switches the five categories, recovers from Perya, and connects the banner to Popular', () => {
+    mount()
+    const group = within(screen.getByRole('group', { name: 'Game categories' }))
+    expect(group.getAllByRole('button').map(button => button.textContent)).toEqual(['ALL', 'Hot', 'Perya', 'Popular', 'New'])
+    expect(screen.queryByText('Your next favorite is here.')).toBeNull()
+    for (const name of ['Hot', 'Popular', 'New']) {
+      fireEvent.click(group.getByRole('button', { name, exact: true }))
+      expect(group.getByRole('button', { name, exact: true }).getAttribute('aria-pressed')).toBe('true')
+      expect(screen.getAllByRole('button', { name: /^View (?!all |picks$)/ }).length).toBeGreaterThan(0)
+    }
+    fireEvent.click(group.getByRole('button', { name: 'Perya' }))
+    expect(screen.getByText('Perya games are coming soon.')).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'View Fortune Rabbit 2' })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Explore all games' }))
+    expect(group.getByRole('button', { name: 'ALL', exact: true }).getAttribute('aria-pressed')).toBe('true')
+    fireEvent.click(dot(2)); fireEvent.click(screen.getByRole('button', { name: 'View picks' }))
+    expect(group.getByRole('button', { name: 'Popular', exact: true }).getAttribute('aria-pressed')).toBe('true')
+    fireEvent.click(screen.getByRole('button', { name: 'Open search' }))
+    fireEvent.change(screen.getByRole('textbox', { name: 'Search games' }), { target: { value: 'Mahjong Ways' } })
+    expect(screen.getByText('No games found')).toBeTruthy()
+    fireEvent.click(group.getByRole('button', { name: 'ALL', exact: true }))
+    expect(screen.getByRole('button', { name: 'View Mahjong Ways' })).toBeTruthy()
+  })
   it('filters search results, reports empty results, and restores the list', () => {
     mount(); fireEvent.click(screen.getByRole('button', { name: 'Open search' }))
     const input = screen.getByRole('textbox', { name: 'Search games' })
@@ -128,7 +151,7 @@ describe('Landing discovery and persistence', () => {
     expect(within(hot).getAllByRole('button', { name: /^View (?!all |picks$)/ }).length).toBe(9)
     fireEvent.click(screen.getByRole('button', { name: 'View all Hot Games' }))
     expect(within(hot).getAllByRole('button', { name: /^View (?!all |picks$)/ }).length).toBe(16)
-    fireEvent.click(screen.getByRole('button', { name: 'New Arrivals', exact: true }))
+    fireEvent.click(screen.getByRole('button', { name: 'New', exact: true }))
     expect(screen.queryByRole('button', { name: 'View Fortune Rabbit 2' })).toBeNull()
     expect(screen.getByRole('button', { name: 'View Gem Saviour Sword' })).toBeTruthy()
   })

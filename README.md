@@ -80,6 +80,8 @@ npm test         # 輪播、搜尋、分類及收藏互動測試
 
 遊戲可搜尋、依展示分類篩選、展開更多卡片，並在資訊面板加入收藏。收藏使用瀏覽器 localStorage 保存，不跨裝置同步；目前各遊戲只展示資訊，尚未串接實際遊戲。人氣與新作為示範編排。
 
+Banner 下方直接呈現五分類：ALL、Hot、Perya、Popular、New。Hot 沿用熱門展示集合，Popular 為精選集合，New 為新作集合；Perya 尚無確認的遊戲資料，顯示英文準備中提示，可返回 ALL。詳見 [五分類計畫](Plans/005-lobby-categories.md)。
+
 - 原始遊戲圖：`Design/games/`，共 134 張，保留原檔；目前挑選 32 張作為展示資料。
 - 前端封面：`public/games/`，320px WebP，依可見區域延遲載入。
 - 原創 Banner：`Design/banners/`；[生成提示詞與素材紀錄](Design/banners/README.md)。使用內建 ImageGen 生成，前端以 `public/banners/` 的 960px WebP 載入，文案為 HTML 疊加。

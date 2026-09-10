@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Compass, Crown, Flame, Gamepad2, Grid2X2, Heart, House, Info, Search, Sparkles, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Compass, Crown, Dices, Flame, Gamepad2, Grid2X2, Heart, House, Info, Search, Sparkles, X } from 'lucide-react'
 import Banner from './Banner'
 import { favoriteKey, games, readFavorites } from './games'
 import type { Game } from './games'
 import './landing.css'
 
-type Filter = 'all' | 'hot' | 'new' | 'featured' | 'favorites'
+type Filter = 'all' | 'hot' | 'new' | 'popular' | 'perya' | 'favorites'
 const categories = [
-  { id: 'all', label: 'All Games', icon: Gamepad2 },
-  { id: 'hot', label: 'Popular', icon: Flame },
-  { id: 'new', label: 'New Arrivals', icon: Sparkles },
-  { id: 'featured', label: 'Featured', icon: Crown },
+  { id: 'all', label: 'ALL', icon: Gamepad2 },
+  { id: 'hot', label: 'Hot', icon: Flame },
+  { id: 'perya', label: 'Perya', icon: Dices },
+  { id: 'popular', label: 'Popular', icon: Crown },
+  { id: 'new', label: 'New', icon: Sparkles },
 ] as const
 
 export default function Landing() {
@@ -61,7 +62,7 @@ export default function Landing() {
   function toggleFavorite(id: string) { setFavorites(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id]) }
 
   const filtered = games.filter(game => {
-    const matchFilter = filter === 'all' || (filter === 'hot' && !game.fresh) || (filter === 'new' && game.fresh) || (filter === 'featured' && game.featured) || (filter === 'favorites' && favorites.includes(game.id))
+    const matchFilter = filter === 'all' || (filter === 'hot' && !game.fresh) || (filter === 'new' && game.fresh) || (filter === 'popular' && game.featured) || (filter === 'perya' && game.perya) || (filter === 'favorites' && favorites.includes(game.id))
     return matchFilter && game.name.toLowerCase().includes(query.trim().toLowerCase())
   })
   const allSections = filter === 'all' && !query.trim()
@@ -76,8 +77,7 @@ export default function Landing() {
     </header>
     <main className="kk-main">
       {searchOpen && <div className="kk-search"><Search size={17} /><input ref={search} aria-label="Search games" placeholder="Find your next favorite…" value={query} onChange={event => { setQuery(event.target.value); setExpanded([]) }} />{query && <button aria-label="Clear search" onClick={() => { setQuery(''); search.current?.focus() }}><X size={17} /></button>}</div>}
-      <Banner onExplore={index => { choose(index === 1 ? 'featured' : index === 2 ? 'new' : 'all'); setQuery(''); scrollTo(catalog.current) }} />
-      <div className="kk-welcome"><Sparkles size={14} /><span>Your next favorite is here.</span><small>Explore · Discover · Save</small></div>
+      <Banner onExplore={index => { choose(index === 1 ? 'popular' : index === 2 ? 'new' : 'all'); setQuery(''); scrollTo(catalog.current) }} />
       <div ref={categoryBar} className="kk-categories" role="group" aria-label="Game categories">
         {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={23} /></span>{label}</button>)}
       </div>
@@ -89,7 +89,7 @@ export default function Landing() {
           {items.length ? <div className="kk-game-grid">{items.slice(0, expanded.includes(id) ? items.length : 9).map((game, index) => <button className="kk-game-card" key={game.id} onClick={event => { opener.current = event.currentTarget; setSelected(game) }} aria-label={`View ${game.name}`}>
             <div className="kk-cover"><img src={game.image} alt={game.name} width="320" height="320" loading={id === 'hot' && index < 3 ? 'eager' : 'lazy'} decoding="async" />{favorites.includes(game.id) && <span className="kk-saved" aria-label="Saved"><Heart size={12} fill="currentColor" /></span>}</div>
             <span className="kk-game-name">{game.name}</span><span className="kk-game-meta">{game.fresh ? 'NEW DISCOVERY' : 'KUN KING SELECT'}<ChevronRight size={10} /></span>
-          </button>)}</div> : <div className="kk-empty"><Heart size={28} /><h3>{filter === 'favorites' && !query ? 'Keep your favorites close.' : 'No games found'}</h3><p>{filter === 'favorites' && !query ? 'Open a game and tap the heart to save it.' : 'Try another name or clear your filters.'}</p><button className="kk-primary" onClick={() => { choose('all'); setQuery('') }}>Explore all games<ArrowRight size={15} /></button></div>}
+          </button>)}</div> : <div className="kk-empty"><Heart size={28} /><h3>{filter === 'perya' ? 'Perya games are coming soon.' : filter === 'favorites' && !query ? 'Keep your favorites close.' : 'No games found'}</h3><p>{filter === 'perya' ? 'Explore our other categories while you wait.' : filter === 'favorites' && !query ? 'Open a game and tap the heart to save it.' : 'Try another name or clear your filters.'}</p><button className="kk-primary" onClick={() => { choose('all'); setQuery('') }}>Explore all games<ArrowRight size={15} /></button></div>}
         </section>)}
         {storageError && <p role="status" className="kk-storage-note">Favorites cannot be saved in this browser. They will last for this visit only.</p>}
       </section>
