@@ -1,0 +1,87 @@
+# Kun King
+
+React SPA 與 Godot 遊戲整合專案。首頁提供「前台」與「後台」入口。
+
+## 開發流程（必須遵守）
+
+本流程適用於所有後續工作，包含新功能、問題修正、重構、設定與文件變更。PLANS 與 FINISH 分別對應現有的 `Plans/` 與 `Finish/` 資料夾，文件以 Markdown（`.md`）為主。
+
+1. **先寫 Plans**：所有要做的事，必須先在 `Plans/` 建立或更新計畫文件，列出需求內容與預計執行事項，不得直接開始實作。
+2. **提交審核並等待開始**：Plans 寫完後，交由專案負責人審核。若有修改意見，先修訂計畫並再次提交；只有在負責人審核後明確說「開始」，才能執行該計畫。提交計畫、未收到回覆或僅通過審核，都不代表可以開始。
+3. **依核准計畫執行與驗證**：Plans 必須包含需求內容、驗收標準及用例，實作與測試依照核准範圍進行。若需新增或變更範圍，先更新 Plans，重新審核並收到「開始」後，才能執行變更部分。
+4. **完成 Finish 報告**：執行後，在 `Finish/` 撰寫 Markdown 驗收及測試報告，連結對應的 Plans，逐項記錄驗收與測試結果。未測試、未通過或受阻的項目應如實列出，不得標記為完成。
+
+### Plans 文件內容
+
+- 需求內容：目標、工作範圍與預計執行事項。
+- 驗收標準：可逐項判定通過或不通過的具體條件。
+- 用例：前置條件、操作步驟與預期結果，涵蓋適用的正常、異常及邊界情境。
+- 審核與執行狀態：待審核、待開始、執行中或已完成；記錄審核與「開始」指示。
+
+### Finish 文件內容
+
+- 對應計畫：Plans 文件連結與實際完成範圍。
+- 驗收報告：逐項對照驗收標準，記錄結果及佐證。
+- 測試報告：測試環境、執行日期、用例、實際結果與通過／失敗／未測試狀態。
+- 未完成事項：已知問題、限制、受阻原因與後續待辦。
+
+## GitHub Pages 靜態網站（待執行）
+
+本專案需要透過 GitHub Pages 提供 React SPA 靜態網站，包含首頁、前台及後台入口。發布計畫、驗收標準與用例見 [GitHub Pages 計畫](Plans/002-github-pages.md)。
+
+目前尚未設定或驗證 Pages 部署；待計畫審核並收到「開始」後，才進行設定與發布，完成後會在此補上實際網站網址及部署操作說明。第一版預計沿用目前的前台準備中畫面與後台預覽骨架。
+
+## 快速開始
+
+需求：Node.js 22.12+、npm；遊戲開發另需 Godot 4.3+ 及相同版本的 Export Templates。
+
+```sh
+npm install
+npm run dev
+```
+
+開啟終端機顯示的本機網址（預設 http://127.0.0.1:5173）。
+
+```sh
+npm run build    # TypeScript 檢查與正式建置，輸出 dist/
+npm run preview  # 預覽正式建置
+```
+
+## 頁面
+
+| 路徑 | 說明 |
+| --- | --- |
+| `#/` | 項目入口：前台與後台 |
+| `#/frontend` | 遊戲前台：檢查 Godot Web 資源並提供啟動按鈕 |
+| `#/admin` | 管理後台骨架：遊戲內容、項目設定、資源管理 |
+
+使用 HashRouter 實現 SPA，重新整理與靜態主機不需額外路由 rewrite。後台目前為開發預覽，尚未實作帳號登入、權限驗證、API 或資料儲存。
+
+## Godot 開發與整合
+
+1. 使用 Godot 匯入 `godot/project.godot`，按 F6/F5 可執行互動示範場景。
+2. 從 Godot「Editor → Manage Export Templates」安裝與編輯器相符的範本。
+3. 將 `godot` 加入 PATH，於儲存庫根目錄執行：
+
+   ```sh
+   npm run godot:export
+   ```
+
+   或從 Godot「Project → Export → Web」匯出至 `public/game/index.html`。
+4. `npm run dev` 開啟前台，按「啟動遊戲」。React 透過 iframe 載入 Godot Web 成品；切換頁面會卸載遊戲，示範步數不保存。
+5. 正式發布請先匯出遊戲，再執行 `npm run build`，將完整 `dist/` 部署至靜態主機。
+
+Web 使用 Compatibility renderer 與單執行緒；主機須正確提供 `.js` JavaScript 與 `.wasm` `application/wasm` MIME 類型。瀏覽器需支援 WebGL 2.0 與 WebAssembly。匯出成品不納入 Git，新的 checkout 需重新匯出；尚未匯出時前台會顯示準備中。參考 [Godot 官方 Web 匯出文件](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)。
+
+## 專案結構
+
+```text
+Design/              設計規格與視覺方向
+Plans/               待審核的開發計畫、需求、驗收標準與用例
+Finish/              驗收及測試報告
+src/                 React SPA、路由與樣式
+godot/               Godot 專案、場景、GDScript 與 Web 匯出設定
+public/game/         Godot Web 匯出輸出位置
+```
+
+首頁採繁體中文、柔和綠色與米色視覺，支援桌機和手機。字型透過 Google Fonts 載入，離線時使用系統字型。

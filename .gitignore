@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+godot/.godot/
+public/game/*
+!public/game/.gitkeep
+.codegraph/
