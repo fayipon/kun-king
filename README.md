@@ -29,7 +29,7 @@ React SPA 與 Godot 遊戲整合專案。首頁提供「前台」與「後台」
 
 本專案需要透過 GitHub Pages 提供 React SPA 靜態網站，包含首頁、前台及後台入口。發布計畫、驗收標準與用例見 [GitHub Pages 計畫](Plans/002-github-pages.md)。
 
-發布網址：[Kun King](https://fayipon.github.io/kun-king/)。首次部署與線上驗收進行中。
+發布網址：[Kun King](https://fayipon.github.io/kun-king/)。2026-09-10 已完成首次部署與線上驗收，詳見 [驗收及測試報告](Finish/002-github-pages.md)。
 
 - [遊戲前台](https://fayipon.github.io/kun-king/#/frontend)
 - [管理後台](https://fayipon.github.io/kun-king/#/admin)

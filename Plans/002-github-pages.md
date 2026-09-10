@@ -1,6 +1,6 @@
 # GitHub Pages 靜態網站發布計畫
 
-- 狀態：執行中
+- 狀態：已完成
 - 建立日期：2026-09-10
 - 開始指示：2026-09-10，負責人審核後回覆「開始」，核准執行本計畫。
 
@@ -41,8 +41,10 @@
 | P07 | Pages 已部署 | 使用手機尺寸開啟首頁 | 卡片呈單欄，主要內容無水平溢出 |
 | P08 | Pages 已部署 | 開啟不存在的 hash 路由並點返回 | 顯示找不到頁面，返回首頁正常 |
 
-## 待執行後記錄
+## 執行記錄
 
-- 審核結果與開始指示。
-- 實際 Pages 網址、部署工作流程與執行結果。
-- 對應 Finish 報告連結。
+- 2026-09-10：負責人回覆「開始」，核准執行。
+- Pages：https://fayipon.github.io/kun-king/
+- 工作流程：`.github/workflows/pages.yml`，build 與 deploy 皆成功。
+- 部署版本：`03830cd`；[Actions 執行記錄](https://github.com/fayipon/kun-king/actions/runs/34461521775)。
+- [Finish 驗收及測試報告](../Finish/002-github-pages.md)。
