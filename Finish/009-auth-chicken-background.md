@@ -2,7 +2,7 @@
 
 - 日期：2026-09-10
 - 計畫：[Plans/009](../Plans/009-auth-chicken-background.md)
-- 狀態：本機完成，待部署。
+- 狀態：已完成，線上驗收通過。
 
 ## 完成內容
 
@@ -15,8 +15,10 @@
 - BG03：表單樣式未修改；390px登入面板top=300，与前版一致；註冊面板構圖對照前版維持原樣。
 - BG04：既有表單測試回歸通過，17項測試成功。
 - BG05：呼吸層位於overflow:hidden背景容器，減少動態效果規則保留；未切換作業系統偏好實測。
-- BG06：npm run build與git diff --check通過，線上待驗證。
+- BG06：npm run build與git diff --check通過，線上確認兩頁均載入neon-chicken素材，body及page為純黑。
 
 ## 限制
 
 被介面遮擋的背景為生成補齊；手機使用瀏覽器尺寸模擬，未使用實體裝置。
+
+部署版本 `da6a715`，[GitHub Actions](https://github.com/fayipon/kun-king/actions/runs/34475984996) success，登入及註冊頁已重新載入驗證。
