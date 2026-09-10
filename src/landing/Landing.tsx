@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BadgeCheck, ChevronDown, ChevronRight, Compass, Crown, Dices, Flame, Gamepad2, Gift, Heart, House, UsersRound, UserRound, Wallet, Sparkles, X } from 'lucide-react'
 import Banner from './Banner'
+import WelcomeModal from './WelcomeModal'
 import { favoriteKey, games, readFavorites } from './games'
 import type { Game } from './games'
 import './landing.css'
@@ -108,7 +109,7 @@ export default function Landing() {
         <details><summary>FAQ<ChevronDown size={16} /></summary><h3>Are my favorites saved?</h3><p>Favorites are saved in this browser. They do not sync across devices and may be lost when you clear site data or use private browsing.</p><h3>How do I find a game?</h3><p>Choose a category to find a game. Search will be available after sign-in. Swipe or drag a banner to discover more themes.</p></details>
         <details><summary>About Kun King<ChevronDown size={16} /></summary><p>One world. Endless possibilities. Kun King brings game discovery to life, with something new around every corner.</p><Link to="/">Back to portal<ArrowRight size={14} /></Link></details>
       </section>
-      <footer className="kk-footer"><Crown size={27} /><strong>KUN KING</strong><p>Every curiosity deserves an adventure.</p><div><span>EXPLORE</span><i /><span>DISCOVER</span><i /><span>PLAY</span></div><small>© {new Date().getFullYear()} Kun King · Game showcase preview</small></footer>
+      <footer className="kk-footer"><Crown size={27} /><strong>KUN KING</strong><p>Every curiosity deserves an adventure.</p><div><span>EXPLORE</span><i /><span>DISCOVER</span><i /><span>PLAY</span></div><small>© {new Date().getFullYear()} Kun King · Game showcase preview</small></footer><WelcomeModal />
     </main>
     <nav className="kk-bottom-nav" aria-label="Lobby navigation">
       {[{ id: 'home', label: 'Home', icon: House }, { id: 'promo', label: 'Promo', icon: Gift }, { id: 'wallet', label: 'Wallet', icon: Wallet }, { id: 'affiliate', label: 'Affiliate', icon: UsersRound }, { id: 'my', label: 'My', icon: UserRound }].map(({ id, label, icon: Icon }) => <button key={id} className={((navPanel ? navPanel.toLowerCase() === id : nav === id) ? 'active ' : '') + (id === 'wallet' ? 'kk-center-nav' : '')} aria-current={!navPanel && nav === id ? 'page' : undefined} aria-expanded={id === 'home' ? undefined : navPanel?.toLowerCase() === id} onClick={event => { if (id === 'home') resetHome(); else { navOpener.current = event.currentTarget; setNavPanel(label); } }}><span><Icon size={id === 'wallet' ? 27 : 20} /></span>{label}</button>)}

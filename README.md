@@ -139,3 +139,7 @@ public/game/         Godot Web 匯出輸出位置
 底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo／Wallet／Affiliate 提供準備中說明，My 提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
 
 目前無真實登入狀態，公開前台不顯示搜尋圖示或搜尋框；待接上帳號服務再提供登入後搜尋。詳見 [Plans/011](Plans/011-navigation-catalog-consistency.md)。
+
+## 首頁歡迎彈窗
+
+前台首頁於每個分頁工作階段首次進入時顯示 Welcome Rewards 彈窗，背景暗化並模糊 8px，青綠／紫色邊框以 9 秒循環緩慢變色。X、Maybe Later、Esc 或遮罩均可關閉，頁尾 Welcome Rewards 可重新開啟。Create Account 前往註冊；目前獎勵僅為 Coming Soon 預告。減少動態效果設定下停用漸層動畫。詳見 [Plans/012](Plans/012-welcome-modal.md) 及 [素材與提示詞](Design/welcome/README.md)。

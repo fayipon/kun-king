@@ -12,6 +12,7 @@ beforeEach(() => {
   motionListeners = new Set()
   vi.stubGlobal('matchMedia', () => ({ get matches() { return reduced }, addEventListener: (_: string, fn: () => void) => motionListeners.add(fn), removeEventListener: (_: string, fn: () => void) => motionListeners.delete(fn) }))
   Object.defineProperty(document, 'hidden', { configurable: true, value: false })
+  sessionStorage.setItem('kun-king:welcome-dismissed:v1', 'yes')
   localStorage.clear()
   Element.prototype.scrollIntoView = vi.fn()
   window.scrollTo = vi.fn()
