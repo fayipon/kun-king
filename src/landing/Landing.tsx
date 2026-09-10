@@ -74,7 +74,7 @@ export default function Landing() {
     <main className="kk-main">
       <Banner onExplore={index => { choose(index === 1 ? 'popular' : index === 2 ? 'new' : 'all'); scrollTo(catalog.current) }} />
       <div ref={categoryBar} className="kk-categories" data-selected={categories.findIndex(category => category.id === filter) >= 0} style={{ '--category-index': Math.max(0, categories.findIndex(category => category.id === filter)) } as CSSProperties} role="group" aria-label="Game categories">
-        {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={21} /></span>{label}</button>)}
+        {categories.map(({ id, label, icon: Icon }) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => choose(id)}><span><Icon size={28} /></span>{label}</button>)}
       </div>
       <section className="kk-catalog" ref={catalog} aria-label="Game catalog">
         {sections.map(({ id, title, subtitle, icon: Icon, items }) => <section className="kk-game-section" key={id} aria-label={title}>
