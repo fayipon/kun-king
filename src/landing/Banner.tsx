@@ -3,9 +3,9 @@ import type { CSSProperties, PointerEvent } from 'react'
 import { ArrowRight, Pause, Play } from 'lucide-react'
 
 const banners = [
-  { image: 'crown', label: 'WELCOME TO YOUR KINGDOM', title: <>你的主場，<br /><em>現在開啟。</em></>, description: '一起探索 Kun King 的精彩世界', cta: '探索遊戲' },
-  { image: 'arcade', label: 'FIND YOUR NEXT FAVORITE', title: <>精彩好玩，<br /><em>一次收藏。</em></>, description: '發現你的下一款心動之作', cta: '查看精選' },
-  { image: 'portal', label: 'A NEW ADVENTURE AWAITS', title: <>下一段冒險，<br /><em>等你登場。</em></>, description: '探索新面孔，找到新樂趣', cta: '探索新作' },
+  { image: 'crown', label: 'WELCOME TO YOUR KINGDOM', title: <>Your world.<br /><em>Your rules.</em></>, description: 'Discover a world of play.', cta: 'Explore games' },
+  { image: 'arcade', label: 'FIND YOUR NEXT FAVORITE', title: <>Great games.<br /><em>All yours.</em></>, description: 'Find your next favorite.', cta: 'View picks' },
+  { image: 'portal', label: 'A NEW ADVENTURE AWAITS', title: <>New worlds.<br /><em>Await you.</em></>, description: 'A new adventure starts here.', cta: 'Discover new' },
 ]
 type Gesture = { id: number; x: number; y: number; width: number; dx: number; axis: 'pending' | 'x' | 'y' }
 
@@ -90,7 +90,7 @@ export default function Banner({ onExplore }: { onExplore: (index: number) => vo
     select(next)
   }
 
-  return <section className={`kk-carousel ${dragging && drag ? 'is-dragging' : ''}`} aria-label="精選主題輪播" aria-roledescription="輪播" tabIndex={0}
+  return <section className={`kk-carousel ${dragging && drag ? 'is-dragging' : ''}`} aria-label="Featured banners" aria-roledescription="carousel" tabIndex={0}
     onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
     onFocusCapture={() => setFocused(true)}
     onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false) }}
@@ -116,7 +116,7 @@ export default function Banner({ onExplore }: { onExplore: (index: number) => vo
         </article>
       })}
     </div>
-    <div className="kk-dots">{banners.map((banner, item) => <button key={banner.image} aria-label={`顯示第 ${item + 1} 張 Banner`} aria-pressed={index === item} onClick={() => select(item)}><span /></button>)}</div>
-    <button className="kk-banner-pause" aria-label={paused ? '播放輪播' : '暫停輪播'} aria-pressed={paused} disabled={reduced} onClick={() => setPaused(value => !value)}>{paused || reduced ? <Play size={12} /> : <Pause size={12} />}</button>
+    <div className="kk-dots">{banners.map((banner, item) => <button key={banner.image} aria-label={`Show banner ${item + 1}`} aria-pressed={index === item} onClick={() => select(item)}><span /></button>)}</div>
+    <button className="kk-banner-pause" aria-label={paused ? 'Play slideshow' : 'Pause slideshow'} aria-pressed={paused} disabled={reduced} onClick={() => setPaused(value => !value)}>{paused || reduced ? <Play size={12} /> : <Pause size={12} />}</button>
   </section>
 }
