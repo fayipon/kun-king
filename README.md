@@ -136,7 +136,7 @@ public/game/         Godot Web 匯出輸出位置
 
 ## 前台導覽與分類一致性
 
-底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo、Wallet、My 開啟各自頁面；Affiliate 提供準備中說明，My 個人資料面板提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
+底部入口為 Home、Promo、Wallet、Affiliate、My，Wallet 位於中央。Promo、Wallet、My 開啟各自頁面；Affiliate 開啟邀請獎勵頁，My 個人資料面板提供 Log In、Register、My Favorites。ALL 依序顯示 Hot、Perya、Popular、New、Feature，與單分類共用名稱、遊戲集合及排序。Popular／Feature 共用既有精選資料，故 ALL 部分分區會有重複遊戲；Perya 目前為準備中。
 
 目前無真實登入狀態，公開前台不顯示搜尋圖示或搜尋框；待接上帳號服務再提供登入後搜尋。詳見 [Plans/011](Plans/011-navigation-catalog-consistency.md)。
 
@@ -173,3 +173,11 @@ public/game/         Godot Web 匯出輸出位置
 提供餘額卡顯示／隱藏、流水進度、期間統計、交易類別與期間篩選、展開完整示範清單、交易詳情及客服說明。示範日期固定於 2026 年 9 月（Today 為 2026-09-10）；交易清單為選取的範例紀錄，並非統計數字的完整帳本。
 
 Deposit／Withdraw 僅顯示服務準備中及登入／註冊入口，不接受付款、不提交提款、不變更餘額。詳見 [Plans/025](Plans/025-wallet-page.md) 與 [Finish/025](Finish/025-wallet-page.md)。
+
+## Affiliate 邀請獎勵預覽
+
+[Affiliate 頁](https://fayipon.github.io/kun-king/#/affiliate) 依 Design/invite.png 呈現三欄統計、原圖旅程地圖、五階段寶箱、邀請進度與最近好友。15 invites 寶箱周圍局部閃光；旗幟字樣柔和變色；減少動態時改為靜態高亮。
+
+View Rewards／寶箱節點顯示門檻；Invite Friends 提供示範碼、註冊連結、複製與登入／註冊入口；Open Chest 提供兩階段開箱预覽；View all 與好友列可查看完整示範紀錄。原生 dialog 支援 Esc、遮罩、X、焦點回復與捲動鎖。
+
+資料集中於 src/affiliate/data.ts，示範日固定 2026-09-11。未連接真實推薦關係、資格判定或獎勵服務，開箱不扣寶箱也不變動 Wallet。詳見 [Plans/027](Plans/027-affiliate-page.md)、[Finish/027](Finish/027-affiliate-page.md)、[素材紀錄](Design/affiliate/README.md)。

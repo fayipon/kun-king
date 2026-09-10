@@ -152,13 +152,10 @@ describe('Lobby categories and navigation', () => {
     const nav = within(screen.getByRole('navigation', { name: 'Lobby navigation' }))
     expect(nav.getAllByRole('button').map(e => e.textContent)).toEqual(['Home', 'Promo', 'Wallet', 'Affiliate', 'My'])
     fireEvent.click(nav.getByRole('button', { name: 'Promo' })); expect(location.hash).toBe('#/promo')
-    for (const name of ['Affiliate']) {
-      fireEvent.click(nav.getByRole('button', { name }))
-      expect(screen.getByRole('dialog', { name })).toBeTruthy()
-      fireEvent(screen.getByRole('dialog', { name }), new Event('cancel', { bubbles: false, cancelable: true }))
-      expect(screen.queryByRole('dialog')).toBeNull()
-      expect(document.activeElement).toBe(nav.getByRole('button', { name }))
-    }
+    fireEvent.click(nav.getByRole('button', { name:'Affiliate' }))
+    expect(location.hash).toBe('#/affiliate')
+    expect(screen.getByRole('heading', { name:'Reward Journey' })).toBeTruthy()
+    expect(nav.getByRole('button', { name:'Affiliate' }).getAttribute('aria-current')).toBe('page')
     fireEvent.click(nav.getByRole('button', { name: 'My' }))
     fireEvent.click(screen.getByRole('button', { name: 'Edit profile' }))
     const panel = within(screen.getByRole('dialog', { name: 'Personal information' }))

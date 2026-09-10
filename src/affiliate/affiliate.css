@@ -1,0 +1,52 @@
+.affiliate-main { display:grid; gap:14px; }
+.affiliate-card { background:linear-gradient(120deg,#122c32,#12242d); border:1px solid #284650; border-radius:12px; overflow:hidden; }
+.affiliate-stats { display:grid; grid-template-columns:1fr 1fr 1fr; padding:14px 8px; }
+.affiliate-stats > div { display:flex; gap:8px; align-items:flex-start; padding:0 9px; min-width:0; }
+.affiliate-stats > div + div { border-left:1px solid #33515d; }
+.affiliate-stats svg { color:#31efc8; flex-shrink:0; }
+.affiliate-stats > div:nth-child(2) svg { color:#ffcd68; }
+.affiliate-stats span { color:#acc3cf; font-size:10px; line-height:1.5; }
+.affiliate-stats strong { display:block; font-size:20px; color:#f1f7f5; line-height:1.3; margin-top:4px; }
+.affiliate-stats > div:last-child strong { font-size:14px; }
+.affiliate-journey { padding:0 6px 10px; }
+.affiliate-heading { display:flex; align-items:center; gap:10px; padding:12px 6px; }
+.affiliate-heading > svg { color:#31efc8; flex-shrink:0; }
+.affiliate-heading h1,.affiliate-heading h2 { font-family:inherit; font-size:16px; line-height:1.35; margin:0; letter-spacing:0; }
+.affiliate-heading > div { min-width:0; }
+.affiliate-heading p { margin:3px 0 0; font-size:10px; line-height:1.5; }
+.affiliate-heading button { display:flex; align-items:center; gap:3px; margin-left:auto; font-size:10px; color:#31efc8; min-height:36px; flex-shrink:0; }
+.affiliate-map { position:relative; aspect-ratio:752/662; border-radius:10px; overflow:hidden; background:#0c2432; }
+.affiliate-art { display:block; width:100%; height:100%; }
+.affiliate-node { position:absolute; width:16%; height:14%; min-width:40px; min-height:32px; transform:translate(-50%,-50%); border-radius:50%; }
+.affiliate-node:hover { box-shadow:0 0 16px #5df5c26b; }
+.affiliate-node.is-next:hover { box-shadow:0 0 16px #ffd868b0; }
+.affiliate-chest-glow { opacity:.2; animation:affiliate-gold-pulse 2.6s ease-in-out infinite; }
+.affiliate-sparkles path { opacity:.4; animation:affiliate-sparkle 2.6s ease-in-out infinite; }
+.affiliate-flag-ink { fill:#50ffd2; animation:affiliate-flag-color 5s ease-in-out infinite; }
+.affiliate-position-glow { opacity:.5; animation:affiliate-position 3s ease-in-out infinite; }
+.affiliate-progress { border:1px solid #2a4652; border-radius:9px; margin:8px 3px; padding:12px; background:#172f36aa; }
+.affiliate-progress > div { display:flex; align-items:center; gap:9px; }
+.affiliate-progress svg { color:#31efc8; }.affiliate-progress h2 { font-size:13px; margin:0; }.affiliate-progress span { margin-left:auto; color:#9dbbc9; font-size:13px; }.affiliate-progress strong { color:#f1f7f5; }
+.affiliate-progress progress { display:block; appearance:none; border:0; border-radius:8px; overflow:hidden; width:100%; height:8px; margin:10px 0 7px; background:#29414c; }
+.affiliate-progress progress::-webkit-progress-bar { background:#29414c; }.affiliate-progress progress::-webkit-progress-value { background:#32efc4; border-radius:8px; }.affiliate-progress progress::-moz-progress-bar { background:#32efc4; border-radius:8px; }
+.affiliate-progress p { font-size:10px; margin:0; }
+.affiliate-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:0 3px; }
+.affiliate-actions .kk-primary { background:#31efc8; min-height:43px; font-size:13px; padding:0 8px; }
+.kk-lobby .affiliate-outline { display:inline-flex; align-items:center; justify-content:center; gap:7px; padding:10px; min-height:43px; border:1px solid #30dcb6; border-radius:7px; color:#31efc8; font-size:13px; font-weight:600; }
+.affiliate-recent .affiliate-heading { padding:12px; border-bottom:1px solid #24414c; }
+.affiliate-friend { display:flex; align-items:center; width:100%; gap:10px; text-align:left; min-height:64px; }
+.kk-lobby .affiliate-friend { padding:9px 12px; }
+.affiliate-friend + .affiliate-friend { border-top:1px solid #24414c; }
+.affiliate-avatar { display:grid; place-items:center; width:34px; height:34px; flex-shrink:0; border-radius:50%; overflow:hidden; background:#284653; color:#5df5c2; }.affiliate-avatar svg { width:100%; height:100%; }
+.affiliate-friend strong { display:block; font-size:13px; }.affiliate-friend small { display:block; color:#9bb4c2; font-size:10px; margin-top:4px; }.affiliate-friend em { margin-left:auto; font-style:normal; background:#153d36; padding:5px 9px; color:#30efc4; border-radius:6px; font-size:10px; }.affiliate-friend > svg { color:#8caab9; flex-shrink:0; }
+.affiliate-disclaimer { text-align:center; margin:0; font-size:10px!important; }
+.affiliate-dialog .kk-dialog-content { padding:36px 20px 24px; }.affiliate-preview { color:#5df5c2; font-size:10px; }.affiliate-stages { list-style:none; margin:18px 0; padding:0; text-align:left; }.affiliate-stages li,.affiliate-detail > div { display:flex; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid #33505a; }.affiliate-stages span { color:#a9c0cb; font-size:11px; }
+.affiliate-copy { display:block; text-align:left; color:#bdd0d9; font-size:12px; margin:18px 0 8px; }.affiliate-copy input { display:block; width:100%; min-width:0; margin-top:8px; padding:12px; border:1px solid #41616d; border-radius:6px; background:#0c202a; color:#e0f7ee; font-size:12px; }.affiliate-auth { display:flex; justify-content:center; gap:24px; }.affiliate-auth a { color:#5df5c2; }.affiliate-detail { text-align:left; font-size:12px; }.affiliate-detail dd { margin:0; }.affiliate-chest-options { display:flex; gap:8px; justify-content:center; }.affiliate-chest-preview { margin:22px auto 0; color:#83a6b1; }.affiliate-chest-preview.is-open { color:#ffdc78; animation:affiliate-open .8s ease-out both; filter:drop-shadow(0 0 15px #ffd54b88); }
+@keyframes affiliate-gold-pulse { 50% { opacity:.55; } }
+@keyframes affiliate-sparkle { 50% { opacity:1; transform:scale(1.2); } }
+@keyframes affiliate-flag-color { 0%,100% { fill:#2ff7bd; } 50% { fill:#b7ffff; } }
+@keyframes affiliate-position { 50% { opacity:1; } }
+@keyframes affiliate-open { 0% { transform:scale(.7) rotate(-10deg); } 55% { transform:scale(1.15) rotate(5deg); } 100% { transform:scale(1); } }
+@media(max-width:380px) { .affiliate-stats > div { display:block; padding:0 6px; }.affiliate-stats svg { width:20px; height:20px; margin-bottom:4px; }.affiliate-stats span { display:block; font-size:10px; }.affiliate-stats strong { font-size:19px; }.affiliate-heading { gap:6px; }.affiliate-heading > svg { width:20px; }.affiliate-heading h1,.affiliate-heading h2 { font-size:14px; }.affiliate-heading p { font-size:9px; }.affiliate-heading button { font-size:9px; }.affiliate-actions .kk-primary,.kk-lobby .affiliate-actions .affiliate-outline { font-size:11px; gap:5px; padding:8px 5px; }.affiliate-actions svg { width:18px; } }
+@media(prefers-reduced-motion:reduce) { .affiliate-chest-glow { opacity:.4; }.affiliate-sparkles path { opacity:.8; }.affiliate-flag-ink { fill:#93ffe5; }.affiliate-position-glow { opacity:.8; } }
+.affiliate-flag-ink { filter:drop-shadow(0 0 2px #53ffc978); }
