@@ -1,11 +1,11 @@
 .kk-body { background: #080f14; }
-.kk-lobby { --mint: #5df5c2; --muted: #8b9da8; color: #f1f7f5; background: #101c24; max-width: 480px; margin: auto; min-height: 100vh; box-shadow: 0 0 100px #0007; font-size: 12px; padding-bottom: calc(94px + env(safe-area-inset-bottom)); }
+.kk-lobby { --header-height: 72px; --mint: #5df5c2; --muted: #8b9da8; color: #f1f7f5; background: #101c24; max-width: 480px; margin: auto; min-height: 100vh; box-shadow: 0 0 100px #0007; font-size: 12px; padding-bottom: calc(94px + env(safe-area-inset-bottom)); }
 .kk-lobby * { box-sizing: border-box; }
 .kk-lobby button { color: inherit; border: 0; background: none; padding: 0; }
 .kk-lobby button:focus-visible, .kk-lobby a:focus-visible, .kk-lobby summary:focus-visible, .kk-lobby input:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
 .kk-lobby button:disabled { opacity: .4; cursor: default; }
 .kk-lobby p { color: var(--muted); font-size: 12px; line-height: 1.8; }
-.kk-header { height: 72px; display: flex; gap: 9px; padding: 0 16px; border-bottom: 1px solid #ffffff09; background: #13222b; }
+.kk-header { position: sticky; top: 0; z-index: 20; height: var(--header-height); display: flex; gap: 9px; padding: 0 16px; border-bottom: 1px solid #ffffff09; background: #13222b; }
 .kk-back { width: 26px; min-height: 44px; display: grid; place-items: center; color: #93a8b2; }
 .kk-logo { display: flex; align-items: center; gap: 8px; margin-right: auto; }
 .kk-logo > span { width: 34px; height: 37px; display: grid; place-items: center; color: var(--mint); background: linear-gradient(135deg,#215f4e,#183b36); border: 1px solid #5df5c24d; border-radius: 9px; box-shadow: inset 0 0 10px #5df5c215; }
@@ -18,6 +18,9 @@
 .kk-demo i { width: 5px; height: 5px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 8px #5df5c299; }
 .kk-main { padding: 14px 16px 0; margin: 0; max-width: none; width: 100%; }
 .kk-search { display: flex; align-items: center; gap: 8px; padding: 2px 10px; margin: 0 0 14px; background: #1c303b; border: 1px solid #38535e; border-radius: 9px; }
+.kk-search:focus-within { border-color: var(--mint); box-shadow: 0 0 0 2px #5df5c226; }
+.kk-lobby .kk-search input:focus-visible { outline: none; }
+.kk-search { scroll-margin-top: calc(var(--header-height) + 14px); }
 .kk-search input { min-width: 0; flex: 1; color: white; font: inherit; background: transparent; border: 0; height: 42px; }
 .kk-search input::placeholder { color: #a3b2b8; }
 .kk-search button { width: 34px; height: 42px; }
@@ -57,7 +60,7 @@
 .kk-dots button span { width: 5px; height: 5px; background: #5d726b; border-radius: 10px; transition: width .2s; }
 .kk-dots button[aria-pressed=true] span { width: 17px; background: var(--mint); }
 .kk-lobby .kk-banner-pause { position: absolute; top: 8px; right: 8px; z-index: 3; width: 30px; height: 30px; display: grid; place-items: center; color: #d7f6e9; background: #07191473; border: 1px solid #ffffff20; border-radius: 50%; backdrop-filter: blur(6px); }
-.kk-categories { position: relative; isolation: isolate; --category-gap: 4px; --category-width: calc((100% - 5 * var(--category-gap)) / 6); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--category-gap); padding: 14px 0 17px; border-bottom: 1px solid #ffffff0c; scroll-margin-top: 12px; }
+.kk-categories { position: relative; isolation: isolate; --category-gap: 4px; --category-width: calc((100% - 5 * var(--category-gap)) / 6); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--category-gap); padding: 14px 0 17px; border-bottom: 1px solid #ffffff0c; scroll-margin-top: calc(var(--header-height) + 12px); }
 .kk-categories::before { content: ""; position: absolute; pointer-events: none; z-index: -1; top: 14px; bottom: 18px; left: calc(var(--category-index) * (var(--category-width) + var(--category-gap))); width: var(--category-width); border-radius: 9px; background: linear-gradient(#1e4943,#14362f); box-shadow: inset 0 0 0 1px #5df5c229; opacity: 0; transition: left 300ms cubic-bezier(.22,1,.36,1), opacity 180ms ease; }
 .kk-categories[data-selected="true"]::before { opacity: 1; }
 .kk-categories button { display: flex; align-items: center; flex-direction: column; gap: 7px; padding: 9px 0; font-size: 10px; color: #9badb4; border-radius: 9px; min-width: 0; min-height: 44px; white-space: nowrap; transition: color 250ms ease; }
@@ -69,7 +72,7 @@
 .kk-categories button:nth-child(6) span { color: #86c9f5; }
 .kk-categories button.active { color: var(--mint); }
 .kk-categories button.active span { color: var(--mint); transform: translateY(-3px) scale(1.1); filter: drop-shadow(0 0 6px #5df5c255); }
-.kk-catalog { scroll-margin-top: 15px; }
+.kk-catalog { scroll-margin-top: calc(var(--header-height) + 15px); }
 .kk-game-section { margin-top: 23px; }
 .kk-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
 .kk-section-heading > div { display: flex; align-items: center; gap: 7px; }
@@ -83,8 +86,9 @@
 .kk-cover img { width: 100%; height: 100%; display: block; object-fit: contain; transition: transform .25s ease; }
 .kk-game-card:hover .kk-cover img { transform: scale(1.035); }
 .kk-saved { position: absolute; right: 5px; top: 5px; display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; color: #5df5c2; background: #0e242bea; }
-.kk-game-name { display: block; font-size: 10px; margin-top: 7px; color: #d7e3e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.kk-game-meta { display: flex; align-items: center; justify-content: space-between; gap: 2px; font-size: 6px; font-weight: 500; letter-spacing: .3px; color: #718b97; margin-top: 4px; }
+.kk-game-name { display: flex; align-items: center; gap: 4px; font-size: 10px; margin-top: 7px; color: #d7e3e8; }
+.kk-game-name > span { min-width: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kk-game-name > svg { flex: 0 0 10px; color: #718b97; }
 .kk-empty { text-align: center; padding: 40px 14px; background: #13252c; border-radius: 10px; color: #78c5ad; }
 .kk-empty h3 { color: #d8eae5; font-size: 16px; }.kk-empty p { margin-bottom: 20px; }
 .kk-storage-note { margin-top: 12px; }
@@ -95,7 +99,7 @@
 .kk-discover h3 { font-size: 12px; margin: 5px 0 3px; font-weight: 500; }
 .kk-discover p { font-size: 9px; }
 .kk-discover button { color: #98d6b8; min-width: 32px; height: 44px; }
-.kk-help { scroll-margin-top: 20px; }
+.kk-help { scroll-margin-top: calc(var(--header-height) + 20px); }
 .kk-help details { border-bottom: 1px solid #2a3b44; }
 .kk-help summary { list-style: none; display: flex; align-items: center; justify-content: space-between; padding: 17px 3px; cursor: pointer; color: #c0d0d8; font-size: 12px; }
 .kk-help summary::-webkit-details-marker { display: none; }
@@ -126,8 +130,9 @@
 .kk-dialog-content > .kk-primary { margin-top: 23px; width: 100%; }
 @media (min-width:480px) { .kk-banner-stage { min-height: 220px; } }
 @media (max-width:359px) {
-  .kk-header { padding: 0 10px; gap: 4px; height: 64px; }.kk-header-tools { gap: 4px; }.kk-demo { font-size: 8px; }.kk-logo > div { font-size: 16px; }.kk-main { padding: 10px 10px 0; }
+  .kk-lobby { --header-height: 64px; }
+  .kk-header { padding: 0 10px; gap: 4px; height: var(--header-height); }.kk-header-tools { gap: 4px; }.kk-demo { font-size: 8px; }.kk-logo > div { font-size: 16px; }.kk-main { padding: 10px 10px 0; }
   .kk-banner-copy { padding: 15px 12px 40px; }.kk-banner-copy h1 { font-size: 22px; }.kk-banner-copy p { font-size: 8px; }.kk-banner-copy > span { font-size: 5px; letter-spacing: .7px; }
-  .kk-game-grid { gap: 13px 7px; }.kk-game-meta { font-size: 5px; }.kk-game-name { font-size: 9px; }.kk-discover { gap: 7px; padding: 14px 9px; }.kk-discover h3 { font-size: 10px; }
+  .kk-game-grid { gap: 13px 7px; }.kk-game-name { font-size: 9px; }.kk-discover { gap: 7px; padding: 14px 9px; }.kk-discover h3 { font-size: 10px; }
 }
 @media (prefers-reduced-motion:reduce) { .kk-lobby *, .kk-lobby *::before, .kk-lobby *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }.kk-banner { transform: none; } .kk-categories button.active span { transform: none; } }

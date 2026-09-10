@@ -117,3 +117,5 @@ public/game/         Godot Web 匯出輸出位置
 首頁採繁體中文、柔和綠色與米色視覺，支援桌機和手機。字型透過 Google Fonts 載入，離線時使用系統字型。
 
 分類切換使用 300ms 選中背景滑移、圖示上提及縮放、光暈與文字顏色轉場；減少動態效果設定下即時切換。詳見 [分類轉場計畫](Plans/006-feature-category-motion.md)。
+
+前台 Header 捲動時保持置頂；搜尋焦點以完整圓角外框呈現。遊戲卡片僅保留名稱與右側箭頭，長名稱省略顯示。詳見 [調整計畫](Plans/007-header-search-game-cards.md)。

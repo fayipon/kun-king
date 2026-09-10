@@ -90,7 +90,7 @@ export default function Landing() {
           </div>
           {items.length ? <div className="kk-game-grid">{items.slice(0, expanded.includes(id) ? items.length : 9).map((game, index) => <button className="kk-game-card" key={game.id} onClick={event => { opener.current = event.currentTarget; setSelected(game) }} aria-label={`View ${game.name}`}>
             <div className="kk-cover"><img src={game.image} alt={game.name} width="320" height="320" loading={id === 'hot' && index < 3 ? 'eager' : 'lazy'} decoding="async" />{favorites.includes(game.id) && <span className="kk-saved" aria-label="Saved"><Heart size={12} fill="currentColor" /></span>}</div>
-            <span className="kk-game-name">{game.name}</span><span className="kk-game-meta">{game.fresh ? 'NEW DISCOVERY' : 'KUN KING SELECT'}<ChevronRight size={10} /></span>
+            <span className="kk-game-name"><span>{game.name}</span><ChevronRight size={10} aria-hidden="true" /></span>
           </button>)}</div> : <div className="kk-empty"><Heart size={28} /><h3>{filter === 'perya' ? 'Perya games are coming soon.' : filter === 'favorites' && !query ? 'Keep your favorites close.' : 'No games found'}</h3><p>{filter === 'perya' ? 'Explore our other categories while you wait.' : filter === 'favorites' && !query ? 'Open a game and tap the heart to save it.' : 'Try another name or clear your filters.'}</p><button className="kk-primary" onClick={() => { choose('all'); setQuery('') }}>Explore all games<ArrowRight size={15} /></button></div>}
         </section>)}
         {storageError && <p role="status" className="kk-storage-note">Favorites cannot be saved in this browser. They will last for this visit only.</p>}
