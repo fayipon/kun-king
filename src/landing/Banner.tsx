@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CSSProperties, PointerEvent } from 'react'
+import type { CSSProperties, PointerEvent, ReactNode } from 'react'
 import { ArrowRight, Pause, Play } from 'lucide-react'
 
-const banners = [
+export type BannerItem = { image: string; label: string; title: ReactNode; description: string; cta: string; decoration?: ReactNode }
+const defaultBanners: BannerItem[] = [
   { image: 'crown', label: 'WELCOME TO YOUR KINGDOM', title: <>Your world.<br /><em>Your rules.</em></>, description: 'Discover a world of play.', cta: 'Explore games' },
   { image: 'arcade', label: 'FIND YOUR NEXT FAVORITE', title: <>Great games.<br /><em>All yours.</em></>, description: 'Find your next favorite.', cta: 'View picks' },
   { image: 'portal', label: 'A NEW ADVENTURE AWAITS', title: <>New worlds.<br /><em>Await you.</em></>, description: 'A new adventure starts here.', cta: 'Discover new' },
 ]
 type Gesture = { id: number; x: number; y: number; width: number; dx: number; axis: 'pending' | 'x' | 'y' }
 
-export default function Banner({ onExplore }: { onExplore: (index: number) => void }) {
+export default function Banner({ onExplore, banners = defaultBanners, imageFolder = "banners" }: { onExplore: (index: number) => void; banners?: BannerItem[]; imageFolder?: string }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -108,8 +109,8 @@ export default function Banner({ onExplore }: { onExplore: (index: number) => vo
         return <article key={banner.image} className={`kk-banner kk-banner-${banner.image} ${item === index ? 'is-active' : ''}`}
           style={{ '--slide-position': position, '--drag-x': `${drag}px` } as CSSProperties}
           aria-hidden={item !== index} inert={item !== index} aria-label={`${item + 1} / 3`}>
-          <img src={`${import.meta.env.BASE_URL}banners/${banner.image}.webp`} alt="" draggable={false} width="960" height="436" fetchPriority={item === 0 ? 'high' : 'auto'} />
-          <div className="kk-banner-glow" aria-hidden="true" />
+          <img src={`${import.meta.env.BASE_URL}${imageFolder}/${banner.image}.webp`} alt="" draggable={false} width="960" height="436" fetchPriority={item === 0 ? 'high' : 'auto'} />
+          <div className="kk-banner-glow" aria-hidden="true" />{banner.decoration}
           <div className="kk-banner-copy"><span>{banner.label}</span><h1>{banner.title}</h1><p>{banner.description}</p>
             <button className="kk-primary" onClick={() => onExplore(item)}>{banner.cta}<ArrowRight size={14} /></button>
           </div>

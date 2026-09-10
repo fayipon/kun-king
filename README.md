@@ -145,3 +145,9 @@ public/game/         Godot Web 匯出輸出位置
 前台首頁於每個分頁工作階段首次進入時顯示 Welcome Rewards 彈窗，背景暗化並模糊 8px，青綠／紫色邊框以 9 秒循環緩慢變色。X、Maybe Later、Esc 或遮罩均可關閉，頁尾 Welcome Rewards 可重新開啟。Create Account 前往註冊；目前獎勵僅為 Coming Soon 預告。減少動態效果設定下停用漸層動畫。詳見 [Plans/012](Plans/012-welcome-modal.md) 及 [素材與提示詞](Design/welcome/README.md)。
 
 登入與註冊頁右上角提供 X，返回前台首頁。歡迎彈窗的裝飾素材透過瀏覽器 alpha 濾鏡清理低透明度殘影，保留原始素材及全頁模糊遮罩。
+
+## Promo 活動頁
+
+[活動頁](https://fayipon.github.io/kun-king/#/promo) 提供 Welcome Bonus／Daily Check-in／Lucky Spin 三張輪播、四張活動卡、三列任務、完整活動清單與詳情面板。首頁底部 Promo 直接進入本頁。Home 返回首頁；Go Play 定位遊戲列表；My Favorites 開啟收藏列表。
+
+活動百分比、獎勵數字與進度均為示範，頁面標示 Preview／Demo，尚未串接領獎、支付、邀請或帳號服務。詳見 [Plans/015](Plans/015-promo-page.md)、[驗收報告](Finish/015-promo-page.md) 與 [素材提示詞](Design/promo/README.md)。

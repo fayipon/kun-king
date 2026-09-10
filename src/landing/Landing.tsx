@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BadgeCheck, ChevronDown, ChevronRight, Compass, Crown, Dices, Flame, Gamepad2, Gift, Heart, House, UsersRound, UserRound, Wallet, Sparkles, X } from 'lucide-react'
 import Banner from './Banner'
 import WelcomeModal from './WelcomeModal'
@@ -30,7 +30,9 @@ function matchesCategory(game: Game, filter: Filter, favorites: string[]) {
 }
 
 export default function Landing() {
-  const [filter, setFilter] = useState<Filter>('all')
+  const navigate = useNavigate()
+  const { search } = useLocation()
+  const [filter, setFilter] = useState<Filter>(() => new URLSearchParams(search).has('favorites') ? 'favorites' : 'all')
   const [favorites, setFavorites] = useState(readFavorites)
   const [storageError, setStorageError] = useState(false)
   const [selected, setSelected] = useState<Game | null>(null)
@@ -112,7 +114,7 @@ export default function Landing() {
       <footer className="kk-footer"><Crown size={27} /><strong>KUN KING</strong><p>Every curiosity deserves an adventure.</p><div><span>EXPLORE</span><i /><span>DISCOVER</span><i /><span>PLAY</span></div><small>© {new Date().getFullYear()} Kun King · Game showcase preview</small></footer><WelcomeModal />
     </main>
     <nav className="kk-bottom-nav" aria-label="Lobby navigation">
-      {[{ id: 'home', label: 'Home', icon: House }, { id: 'promo', label: 'Promo', icon: Gift }, { id: 'wallet', label: 'Wallet', icon: Wallet }, { id: 'affiliate', label: 'Affiliate', icon: UsersRound }, { id: 'my', label: 'My', icon: UserRound }].map(({ id, label, icon: Icon }) => <button key={id} className={((navPanel ? navPanel.toLowerCase() === id : nav === id) ? 'active ' : '') + (id === 'wallet' ? 'kk-center-nav' : '')} aria-current={!navPanel && nav === id ? 'page' : undefined} aria-expanded={id === 'home' ? undefined : navPanel?.toLowerCase() === id} onClick={event => { if (id === 'home') resetHome(); else { navOpener.current = event.currentTarget; setNavPanel(label); } }}><span><Icon size={id === 'wallet' ? 27 : 20} /></span>{label}</button>)}
+      {[{ id: 'home', label: 'Home', icon: House }, { id: 'promo', label: 'Promo', icon: Gift }, { id: 'wallet', label: 'Wallet', icon: Wallet }, { id: 'affiliate', label: 'Affiliate', icon: UsersRound }, { id: 'my', label: 'My', icon: UserRound }].map(({ id, label, icon: Icon }) => <button key={id} className={((navPanel ? navPanel.toLowerCase() === id : nav === id) ? 'active ' : '') + (id === 'wallet' ? 'kk-center-nav' : '')} aria-current={!navPanel && nav === id ? 'page' : undefined} aria-expanded={id === 'home' ? undefined : navPanel?.toLowerCase() === id} onClick={event => { if (id === 'home') resetHome(); else if (id === 'promo') navigate('/promo'); else { navOpener.current = event.currentTarget; setNavPanel(label); } }}><span><Icon size={id === 'wallet' ? 27 : 20} /></span>{label}</button>)}
 
     </nav>
     <dialog className="kk-dialog kk-nav-dialog" ref={navDialog} aria-labelledby="nav-panel-title" onCancel={event => { event.preventDefault(); closeNav() }} onClick={event => { if (event.target === event.currentTarget) closeNav() }}>
