@@ -1,7 +1,7 @@
 # Promo 活動頁验收報告
 
 - 計畫：Plans/015-promo-page.md；已核准執行。
-- 狀態：本機完成，待 GitHub Pages 驗證。
+- 狀態：完成，GitHub Pages 已驗證。
 
 ## 成果
 
@@ -20,3 +20,5 @@
 - 實際操作活動詳情、Esc、X、Invite、Explore All、My Favorites。關閉後焦點回到觸發入口，body overflow恢復。
 - 390px確認所有圖片成功載入。手機窄版已修正Check-in斷字及圖片裁切。
 - 減少動態效果沿用既有已測試的輪播實作；本次未實際切換作業系統設定或使用Safari／Firefox。
+
+部署版本2feb323；GitHub Actions 34482206233成功。線上 #/promo 直連正常，所有圖片載入成功，Cashback詳情可開啟。桌面1280px確認頁面置中。
