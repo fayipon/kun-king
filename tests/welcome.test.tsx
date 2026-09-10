@@ -12,6 +12,22 @@ beforeEach(() => {
 })
 afterEach(() => { cleanup(); vi.restoreAllMocks(); sessionStorage.clear() })
 const mount = () => render(<MemoryRouter><Routes><Route path="/" element={<WelcomeModal />} /><Route path="/register" element={<h1>Registration page</h1>} /></Routes></MemoryRouter>)
+it.each(['Close welcome', 'Maybe Later', 'Escape', 'backdrop'])('does not force focus onto the logo after automatic welcome: %s', action => {
+  const logo = document.createElement('a')
+  logo.className = 'kk-logo'
+  logo.href = '#/frontend'
+  document.body.append(logo)
+  const focus = vi.spyOn(logo, 'focus')
+  try {
+    mount()
+    if (action === 'Escape') fireEvent(screen.getByRole('dialog'), new Event('cancel', { cancelable: true }))
+    else if (action === 'backdrop') fireEvent.click(screen.getByRole('dialog'))
+    else fireEvent.click(screen.getByRole('button', { name: action }))
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(focus).not.toHaveBeenCalled()
+    expect(document.body.style.overflow).toBe('auto')
+  } finally { logo.remove() }
+})
 it('welcomes once per document load, restores scrolling, and allows reopening', () => {
   const view = mount()
   expect(screen.getByRole('dialog', { name: /Welcome Rewards/ })).toBeTruthy()

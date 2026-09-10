@@ -20,7 +20,7 @@ export default function WelcomeModal() {
     return () => {
       element.close()
       document.body.style.overflow = overflow
-      const target = returnTo.current ?? document.querySelector<HTMLElement>('.kk-logo')
+      const target = returnTo.current
       if (target?.isConnected) target.focus({ preventScroll: true })
     }
   }, [open])
