@@ -1,6 +1,6 @@
 # 前台 Mobile Landing Page
 
-- 狀態：執行中
+- 狀態：已完成
 - 日期：2026-09-10
 - 開始指示：2026-09-10，負責人回覆「開始」，核准執行本計畫。
 
@@ -99,4 +99,4 @@
 
 ## 完成後報告
 
-執行完成後建立 `Finish/003-mobile-frontend-landing.md`，記錄素材、建置、各尺寸與互動測試、Pages 部署結果、已知限制及實際佐證。目前未開始製作或測試，不預先標記完成。
+已建立 [驗收及測試報告](../Finish/003-mobile-frontend-landing.md)，記錄素材、建置、各尺寸與互動測試、Pages 部署結果及限制。部署版本 `73b0166`，[GitHub Actions 執行成功](https://github.com/fayipon/kun-king/actions/runs/34465904106)。

@@ -2,7 +2,9 @@
 
 - 對應計畫：[003-mobile-frontend-landing](../Plans/003-mobile-frontend-landing.md)
 - 執行日期：2026-09-10
-- 狀態：本機驗證完成，等待 Pages 部署與線上驗收。
+- 狀態：驗收完成；本機測試、CI 建置與 Pages 線上驗收通過。
+- 線上前台：https://fayipon.github.io/kun-king/#/frontend
+- 部署版本：`73b0166`；[Actions 執行記錄](https://github.com/fayipon/kun-king/actions/runs/34465904106)，build 與 deploy 皆 success。
 
 ## 完成內容
 
@@ -46,7 +48,7 @@
 | L11 | 桌面大廳置中，最大 480px | 通過 |
 | L12 | Enter 開啟面板、Tab 操作、Escape 關閉並回到觸發卡片；原生 modal 限制背景互動 | 通過 |
 | L13 | 四個路由均可直接載入及重新整理；`#/play` 資源缺少時顯示準備中 | 通過 |
-| L14 | 待 Pages 發布後執行 | 待測試 |
+| L14 | 線上首屏正常；三張 Banner 圖片均載入，手動切換與 CTA 篩選正常；資訊面板、底部首頁導覽正常；手機 clientWidth 與 scrollWidth 同為 375px、無破圖 | 通過 |
 
 頁尾 DOM 底部 758.875px，固定導覽頂部 777px，內容未遭遮擋。圖片檢查未發現已載入但解碼失敗的圖片。
 

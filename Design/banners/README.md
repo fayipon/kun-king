@@ -22,5 +22,3 @@
 - 提示詞：
 
 > Use case: ads-marketing. Premium 3D fantasy exploration banner background, landscape 2.2:1. Indigo and cyan teal palette. A fantastical floating rocky island with an ancient circular portal emitting luminous turquoise light, small crystalline formations and sweeping light trails on RIGHT HALF. Cinematic polished fantasy game illustration, magical atmospheric depth, vivid teal rim lighting. LEFT HALF dark midnight blue negative space reserved for HTML text. No lettering, no typography, no logos, no numbers. Full bleed composition, mobile gaming promotional artwork.
-
-
