@@ -1,6 +1,6 @@
 # Banner Slider 與分層轉場
 
-- 狀態：執行中
+- 狀態：已完成
 - 開始指示：負責人已回覆「開始」，核准執行本計畫。
 
 ## 需求與版面
@@ -66,4 +66,4 @@
 
 ## Finish
 
-完成後建立 `Finish/004-banner-slider-motion.md`，記錄測試方式、各用例結果、部署版本與實體裝置驗證限制；未執行的驗證如實標註。
+已完成 [Finish 驗收報告](../Finish/004-banner-slider-motion.md)。部署版本 `41af938`，[GitHub Actions](https://github.com/fayipon/kun-king/actions/runs/34467203899) 成功，線上拖曳與 CTA 已驗證。實體裝置驗證限制詳見報告。

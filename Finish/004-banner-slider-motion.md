@@ -1,7 +1,9 @@
 # Banner Slider 與分層轉場驗收
 
 - 計畫：[004-banner-slider-motion](../Plans/004-banner-slider-motion.md)
-- 狀態：本機驗證完成，待線上部署驗收。
+- 狀態：本機、CI 與線上驗收完成。
+- 部署版本：`41af938`；[Actions 執行成功](https://github.com/fayipon/kun-king/actions/runs/34467203899)。
+- 線上網址：https://fayipon.github.io/kun-king/#/frontend
 
 ## 修改結果
 
@@ -28,7 +30,7 @@
 | B09 | 自動化初始及動態 reduced-motion 停播，手動切換可用；CSS 關閉動畫 | 通過（模擬） |
 | B10 | 瀏覽器方向鍵及圓點 Enter 切換正常 | 通過 |
 | B11 | 320／390／430／1280px：文件無水平溢出、圓點在圖片內；CTA 安全區修正 | 通過 |
-| B12 | 待 Pages 發布後驗證 | 待測試 |
+| B12 | 正式網站實際拖曳由第 1 張切至第 2 張，圖片與文字正常；CTA 切換至編輯精選 22 筆；頁碼／箭頭已移除、圓點位於圖內 | 通過 |
 
 ## 限制
 
