@@ -6,4 +6,4 @@
 - 本機瀏覽器：點 X 後 Logo outline 為 none、焦點回到 BODY、scrollY 為 0、捲動鎖解除。
 - 手動開啟再關閉：焦點回到 kk-welcome-trigger，Logo 無外框。
 - 鍵盤 Tab 到 Logo 仍有焦點提示，未移除全域鍵盤導覽樣式。
-- 部署：待確認。
+- 部署版本 feb2287，GitHub Actions 34489758551 成功。線上點 X 後彈窗關閉、Logo outline 為 none、scrollY 保持 0。
