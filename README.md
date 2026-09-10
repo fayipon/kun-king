@@ -25,11 +25,22 @@ React SPA 與 Godot 遊戲整合專案。首頁提供「前台」與「後台」
 - 測試報告：測試環境、執行日期、用例、實際結果與通過／失敗／未測試狀態。
 - 未完成事項：已知問題、限制、受阻原因與後續待辦。
 
-## GitHub Pages 靜態網站（待執行）
+## GitHub Pages 靜態網站
 
 本專案需要透過 GitHub Pages 提供 React SPA 靜態網站，包含首頁、前台及後台入口。發布計畫、驗收標準與用例見 [GitHub Pages 計畫](Plans/002-github-pages.md)。
 
-目前尚未設定或驗證 Pages 部署；待計畫審核並收到「開始」後，才進行設定與發布，完成後會在此補上實際網站網址及部署操作說明。第一版預計沿用目前的前台準備中畫面與後台預覽骨架。
+發布網址：[Kun King](https://fayipon.github.io/kun-king/)。首次部署與線上驗收進行中。
+
+- [遊戲前台](https://fayipon.github.io/kun-king/#/frontend)
+- [管理後台](https://fayipon.github.io/kun-king/#/admin)
+
+發布來源為 GitHub Actions，工作流程位於 [pages.yml](.github/workflows/pages.yml)。推送程式或設定變更至 `main` 後，會自動使用 Node.js 22、`npm ci` 與 `npm run build` 建置，再將 `dist/` 部署至 Pages。僅 Markdown 文件變更不觸發部署；也可在 [Actions](https://github.com/fayipon/kun-king/actions/workflows/pages.yml) 選擇 **Run workflow** 手動發布。
+
+儲存庫 **Settings → Pages → Source** 使用 **GitHub Actions**。Vite 使用相對資源路徑 `base: './'`，路由使用 HashRouter，適用 `/kun-king/` 子路徑；分享子頁面時請保留 `#/frontend` 或 `#/admin`。
+
+目前部署只包含 React 靜態頁面。Godot Web 匯出成品未納入 Git，工作流程也尚未匯出遊戲，因此前台顯示準備中；後台為公開預覽骨架，尚無登入或管理 API。Godot 成品的自動發布另列後續計畫。
+
+部署失敗時請查看 Actions 的 build／deploy 記錄；修正後重新推送，或手動重新執行工作流程。發布方式參考 [GitHub Pages 官方文件](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
 
 ## 快速開始
 
