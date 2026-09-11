@@ -1,3 +1,4 @@
+@import '../close-control.css';
 .auth-body { background: #000; }
 .auth-page { --aqua: #5df5c2; --ink: #8b9da8; position: relative; isolation: isolate; max-width: 560px; min-height: 100vh; margin: 0 auto; padding-bottom: 0; color: #f1f7f5; background: #000; overflow: hidden; font-size: 13px; }
 .auth-page * { box-sizing: border-box; }
@@ -49,5 +50,8 @@
 .auth-dialog-close:hover { color:var(--aqua); }
 @media(max-width:480px) { .auth-header-actions .auth-motto { display:none; } }
 
-/* Match the original Welcome Rewards circular close control. */
-.auth-page .auth-close { display:grid; place-items:center; position:absolute; top:12px; right:11px; width:30px; height:30px; padding:0; border-radius:50%; border:1px solid #b394c787; background:#110b20bd; color:#ead9ff; z-index:3; text-decoration:none; }
+
+.auth-steps li { color:#5df5c2; }
+.auth-steps li > span { border-color:#5df5c28c; }
+.auth-steps li:not(:last-child)::after { background:#5df5c28c; }
+.auth-steps [aria-current] > span { border-color:#5df5c2; }
