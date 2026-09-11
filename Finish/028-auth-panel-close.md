@@ -7,4 +7,4 @@
 - 瀏覽器：320px登入、560px註冊截圖確認；X位於卡片內，含邊框右／上距9px，與內容有4px淨空。Header 已無X。點擊返回 `#/frontend` 正常。
 - 開啟 Terms 彈窗核對計算樣式：兩個 X 都是40×40px、rgba(0,0,0,0)背景、rgb(241,247,245)前景。
 - `npm test`：57/57通過；`npm run build`：通過。未新增僅重複樣式實作的測試。
-- 部署待推送後確認。
+- 已推送2c76e87；GitHub Actions 34544697055部署成功。線上重新整理後，登入與註冊均確認 panelClose=true、headerClose=false；登入按鈕計算寬度40px。正式JS index-EzB9NSkV.js／CSS index-C5EC-Bxq.css與本次建置一致。
