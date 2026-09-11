@@ -51,10 +51,15 @@ it('switches standalone routes with cleared passwords and handles service notice
   expect((screen.getByLabelText('Password', { exact: true }) as HTMLInputElement).value).toBe('')
   fireEvent.click(screen.getByRole('link', { name: 'Log In' }))
   expect(document.title).toBe('Kun King · Log In')
-  for (const name of ['Continue with Google', 'Continue with Apple', 'Continue with Facebook', 'Forgot password?', 'Terms & Privacy Policy']) {
+  expect(screen.queryByRole('link', { name:'Continue as Guest' })).toBeNull()
+  expect(screen.queryByRole('button', { name:'Terms & Privacy Policy' })).toBeNull()
+  for (const name of ['Continue with Google', 'Continue with Apple', 'Continue with Facebook', 'Forgot password?']) {
     fireEvent.click(screen.getByRole('button', { name, exact: true }))
     expect(screen.getByRole('dialog')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Close notice' }))
     expect(screen.queryByRole('dialog')).toBeNull()
   }
+  fireEvent.click(screen.getByRole('link', { name:'Create Account' }))
+  fireEvent.click(screen.getByRole('button', { name:'Terms & Privacy Policy' }))
+  expect(screen.getByRole('dialog')).toBeTruthy()
 })
