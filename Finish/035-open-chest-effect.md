@@ -33,3 +33,7 @@ Affiliate Open Chest 現在直接啟動1秒浮起、0.6秒輕抖加0.1秒停頓�
 初始5、10為原圖金色未領箱，15、20、25為灰色鎖箱。第一次Claim後只將5變為原圖打勾箱；10仍金色，15仍鎖定。瀏覽器已核對初始與第一次領取畫面，新增狀態回歸測試涵蓋Reset。
 
 未領金箱恢復原本呼吸光暈與交錯星光；已領／鎖箱不閃光。瀏覽器已確認5與10節點，Vite建置通過。
+
+## 部署結果
+
+提交 1cef527 已推送main；[GitHub Pages部署](https://github.com/fayipon/kun-king/actions/runs/34550426902)成功，線上HTML確認載入本次index-Vwe4RGEW.js。63項測試與建置通過。
