@@ -119,7 +119,7 @@ describe('Lobby categories and navigation', () => {
   const mount = () => render(<HashRouter><App/></HashRouter>)
   const cards = (region: HTMLElement) => within(region).queryAllByRole('button', { name: /^View (?!all )/ }).map(e => e.getAttribute('aria-label'))
   const favorites = () => { fireEvent.click(screen.getByRole('button', { name: 'My', exact: true })); fireEvent.click(screen.getByRole('button', { name: 'Edit profile' })); fireEvent.click(screen.getByRole('link', { name: 'My Favorites', exact: true })) }
-  it('keeps all five section titles and expanded game order identical to individual categories', () => {
+  it('keeps all five section previews consistent with individual categories', () => {
     mount()
     const names = ['Hot', 'Perya', 'Popular', 'New', 'Feature']
     expect(within(screen.getByRole('region', { name: 'Game catalog' })).getAllByRole('region').map(e => e.getAttribute('aria-label'))).toEqual(names)
@@ -130,9 +130,9 @@ describe('Lobby categories and navigation', () => {
       if (expand) fireEvent.click(expand)
       lists.set(name, cards(region))
     }
-    expect(lists.get('Hot')?.length).toBe(16)
-    expect(lists.get('Popular')?.length).toBe(22)
-    expect(lists.get('New')?.length).toBe(16)
+    expect(lists.get('Hot')?.length).toBe(9)
+    expect(lists.get('Popular')?.length).toBe(9)
+    expect(lists.get('New')?.length).toBe(9)
     for (const name of names) {
       fireEvent.click(screen.getByRole('button', { name, exact: true }))
       const region = screen.getByRole('region', { name, exact: true })
@@ -185,4 +185,32 @@ describe('Lobby categories and navigation', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add favorite' }))
     expect(screen.getByRole('button', { name: 'Remove favorite' })).toBeTruthy()
   })
+})
+
+it('routes View all to category search and loads unique batches to the end',()=>{
+  render(<HashRouter><App/></HashRouter>)
+  fireEvent.click(screen.getByRole('link',{name:'View all Hot'}))
+  expect(location.hash).toBe('#/games?category=hot')
+  const count=()=>screen.getAllByRole('button',{name:/^View (?!all|picks)/}).length
+  expect(count()).toBe(12)
+  fireEvent.click(screen.getByRole('button',{name:'Load more'}));expect(count()).toBe(16)
+  expect(screen.queryByRole('button',{name:'Load more'})).toBeNull()
+  fireEvent.change(screen.getByRole('searchbox'),{target:{value:'  RABBIT  '}})
+  expect(screen.getByRole('button',{name:'View Fortune Rabbit 2'})).toBeTruthy();expect(count()).toBe(1)
+  fireEvent.change(screen.getByRole('searchbox'),{target:{value:'zzzz-not-a-game'}})
+  expect(screen.getByText('No games found')).toBeTruthy()
+  fireEvent.click(screen.getByRole('button',{name:'Clear'}));expect(count()).toBe(12)
+  expect(screen.queryByRole('group',{name:'Game categories'})).toBeNull()
+})
+it('loads from the scroll sentinel and disconnects observers',()=>{
+  let callback:IntersectionObserverCallback=()=>{}
+  const disconnect=vi.fn()
+  vi.stubGlobal('IntersectionObserver',class { constructor(cb:IntersectionObserverCallback){callback=cb} observe(){} disconnect=disconnect })
+  window.history.replaceState(null,'','/#/games?category=unknown')
+  const view=render(<HashRouter><App/></HashRouter>)
+  expect(screen.getByRole('region',{name:'ALL',exact:true})).toBeTruthy()
+  expect(screen.getAllByRole('button',{name:/^View (?!picks)/})).toHaveLength(12)
+  act(()=>callback([{isIntersecting:true}] as IntersectionObserverEntry[],{} as IntersectionObserver))
+  expect(screen.getAllByRole('button',{name:/^View (?!picks)/})).toHaveLength(24)
+  view.unmount();expect(disconnect).toHaveBeenCalled()
 })
