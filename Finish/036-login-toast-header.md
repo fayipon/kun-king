@@ -1,7 +1,7 @@
 # 登入Toast與登入後Header
 
 - 計畫：[Plans/036](../Plans/036-login-toast-header.md)。
-- 日期：2026-09-11；本地完成，尚未提交或部署。
+- 日期：2026-09-11；已提交並部署。
 
 ## 完成
 
@@ -24,3 +24,7 @@
 餘額與通知為固定示範資料，與真實帳戶服務無關。本次未改登入背景、地圖或開箱獎勵入帳行為。
 
 Toast錯誤圖示已改為紅色漸層圓底、單一白色驚嘆號，移除雙重圓框；建置通過。
+
+## 部署
+
+程式提交ee867ab已推送main；[GitHub Pages](https://github.com/fayipon/kun-king/actions/runs/34554177754)成功。線上HTML已載入本次index-D-yltZAK.js與index-BpL-4lzA.css。
