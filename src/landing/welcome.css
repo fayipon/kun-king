@@ -20,3 +20,7 @@
 @media(prefers-reduced-motion:reduce) { .kk-welcome-frame { animation: none; } }
 
 .kk-welcome-filter { position: absolute; pointer-events: none; }
+
+/* Preserve the reference appearance even after pointer focus changes. */
+.kk-lobby .kk-welcome-close { outline:2px solid var(--mint); outline-offset:3px; }
+.kk-lobby .kk-welcome-close:focus-visible { box-shadow:inset 0 0 0 1px #5df5c2; }
