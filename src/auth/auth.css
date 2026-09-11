@@ -78,3 +78,6 @@
   0%,100% { box-shadow:0 12px 50px #0006,0 0 16px #5df5c22c,0 0 24px #b844f426; }
   50% { box-shadow:0 12px 50px #0006,0 0 16px #b844f43a,0 0 24px #5df5c226; }
 }
+
+.auth-create-link { display:table; margin:14px auto 0; padding:4px 0; color:var(--aqua); font-size:13px; font-weight:600; line-height:1.5; text-decoration:none; white-space:nowrap; }
+.auth-create-link:hover { text-decoration:underline; text-underline-offset:3px; }
