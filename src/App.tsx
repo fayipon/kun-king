@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { ArrowUpRight, ArrowLeft, Crown, Gamepad2, LayoutDashboard, Layers3, Box, CircleHelp } from 'lucide-react'
 import Landing from './landing/Landing'
 import Auth from './auth/Auth'
+import { SessionProvider } from './auth/Session'
 import Promo from './promo/Promo'
 import My from './my/My'
 import WalletPage from './wallet/Wallet'
@@ -56,7 +57,9 @@ function Admin() {
   </section>
 }
 
-export default function App() {
+export default function App() { return <SessionProvider><AppRoutes /></SessionProvider> }
+
+function AppRoutes() {
   const { pathname } = useLocation()
   useEffect(() => { document.title = `Kun King · ${pathname === '/' ? '項目入口' : pathname === '/affiliate' ? 'Affiliate' : pathname === '/wallet' ? 'Wallet' : pathname === '/my' ? 'My Account' : pathname === '/promo' ? 'Promotions' : pathname === '/frontend' ? 'Game Lobby' : pathname === '/login' ? 'Log In' : pathname === '/register' ? 'Create Account' : pathname === '/play' ? 'Godot 示範' : pathname === '/admin' ? '管理後台' : '找不到頁面'}`; if (!['/frontend','/promo','/my','/wallet','/affiliate','/play'].includes(pathname)) window.scrollTo(0, 0) }, [pathname])
   if (pathname === '/login' || pathname === '/register') return <Auth key={pathname} register={pathname === '/register'} />

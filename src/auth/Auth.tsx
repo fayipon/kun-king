@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { useSession } from './Session'
+import { welcomeVisit } from '../landing/WelcomeModal'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, Crown, Eye, EyeOff, LockKeyhole, Mail, UserRound, X } from 'lucide-react'
 import './auth.css'
 
@@ -9,6 +11,7 @@ function savedName() { try { return localStorage.getItem(rememberKey) ?? '' } ca
 type Fields = 'identity' | 'username' | 'email' | 'password' | 'confirm' | 'terms'
 
 export default function Auth({ register }: { register: boolean }) {
+  const session = useSession(), navigate = useNavigate()
   const [identity, setIdentity] = useState(savedName)
   const [remember, setRemember] = useState(() => !!savedName())
   const [visible, setVisible] = useState<Record<string, boolean>>({})
@@ -41,11 +44,12 @@ export default function Auth({ register }: { register: boolean }) {
     }
     setErrors(next)
     const first = Object.keys(next)[0]
-    if (first) { (form.elements.namedItem(first) as HTMLInputElement)?.focus(); return }
+    if (first) { if (!register) session.notify('Please check your login details.', 'error'); (form.elements.namedItem(first) as HTMLInputElement)?.focus(); return }
     if (!register) {
       try { if (remember) localStorage.setItem(rememberKey, identity.trim()); else localStorage.removeItem(rememberKey) } catch { /* Form remains usable without storage. */ }
     }
-    setStatus(register ? 'Account creation is not connected yet. No account has been created.' : 'Sign-in is not connected yet. Continue as a guest to explore.')
+    if (!register) { session.login(); welcomeVisit.dismissed = true; navigate('/frontend'); return }
+    setStatus('Account creation is not connected yet. No account has been created.')
   }
   const field = (name: Exclude<Fields, 'terms'>, label: string, type = 'text') => {
     const secret = type === 'password', Icon = secret ? LockKeyhole : name === 'username' ? UserRound : Mail

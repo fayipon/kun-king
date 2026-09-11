@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import App from '../src/App'
 
-beforeEach(() => {
+beforeEach(() => { window.matchMedia=vi.fn().mockReturnValue({matches:false,addEventListener:vi.fn(),removeEventListener:vi.fn()});
   localStorage.clear(); window.scrollTo = vi.fn()
   HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', '') }
   HTMLDialogElement.prototype.close = function () { this.removeAttribute('open') }
@@ -21,7 +21,7 @@ it('validates login and remembers only the identifier', () => {
   fireEvent.click(screen.getByRole('button', { name: 'Show password', exact: true }))
   expect(screen.getByLabelText('Password', { exact: true }).getAttribute('type')).toBe('text')
   fireEvent.click(screen.getByRole('button', { name: 'Log In', exact: true }))
-  expect(screen.getByRole('status').textContent).toContain('not connected')
+  expect(screen.getByText('Demo sign-in successful · Preview only')).toBeTruthy()
   expect(localStorage.getItem('kun-king:login-name')).toBe('demo')
   expect(JSON.stringify(localStorage)).not.toContain('test-password')
   view.unmount(); mount()
