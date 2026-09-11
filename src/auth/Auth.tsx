@@ -66,7 +66,7 @@ export default function Auth({ register }: { register: boolean }) {
       <section className="auth-hero" aria-label={register ? 'Create your account' : 'Welcome to Kun King'}>{register ? <><h1>Create<br /><em>Account</em></h1><p>Get in. Play more.<br />A bigger playground awaits.</p></> : <p className="auth-tagline">Good games.<br /><em>Brighter days.</em></p>}</section>
       {register && <ol className="auth-steps" aria-label="Registration steps">{[['Create Account', 'Quick & Easy'], ['Verify Account', 'Secure Your Play'], ['Start Playing', 'Explore & Enjoy']].map(([title, text], i) => <li key={title} aria-current={i === 0 ? 'step' : undefined}><span>{i + 1}</span><strong>{title}</strong><small>{text}</small></li>)}</ol>}
       <section className="auth-panel" aria-label={register ? 'Registration form' : 'Login form'}>
-        <Link className="auth-close" to="/frontend" aria-label="Back to game lobby"><X size={21} aria-hidden="true" /></Link>
+        <Link className="auth-close" to="/frontend" aria-label="Back to game lobby"><X size={18} aria-hidden="true" /></Link>
         {!register && <div className="auth-panel-title"><h1>Welcome back</h1><p>Sign in to continue your adventure</p></div>}
         <form onSubmit={submit} noValidate>
           {register ? <>{field('username', 'Username')}{field('email', 'Email Address', 'email')}</> : field('identity', 'Email or Username')}

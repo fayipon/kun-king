@@ -8,3 +8,9 @@
 - 開啟 Terms 彈窗核對計算樣式：兩個 X 都是40×40px、rgba(0,0,0,0)背景、rgb(241,247,245)前景。
 - `npm test`：57/57通過；`npm run build`：通過。未新增僅重複樣式實作的測試。
 - 已推送2c76e87；GitHub Actions 34544697055部署成功。線上重新整理後，登入與註冊均確認 panelClose=true、headerClose=false；登入按鈕計算寬度40px。正式JS index-EzB9NSkV.js／CSS index-C5EC-Bxq.css與本次建置一致。
+
+## 使用者更正：圓框 X
+
+先前誤將「彈窗」理解為服務說明面板；使用者指定的是 Welcome Rewards 帶圓框版本。已將登入／註冊的關閉控制改為與 `.kk-welcome-close` 相同：30px、50%圓角、1px #b394c787 邊框、#110b20bd 底色、#ead9ff 前景、18px X、top12/right11。仍位於表單卡片內右上角。
+
+本地瀏覽器截圖及計算樣式確認圓框／底色／圖示尺寸正確，正式建置通過。此段取代上方透明樣式的最終規格。

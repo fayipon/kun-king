@@ -144,7 +144,7 @@ public/game/         Godot Web 匯出輸出位置
 
 前台首頁於每次頁面載入後首次進入時顯示 Welcome Rewards 彈窗，背景暗化並模糊 8px，青綠／紫色邊框以 9 秒循環緩慢變色。X、Maybe Later、Esc 或遮罩均可關閉，頁尾 Welcome Rewards 可重新開啟。Create Account 前往註冊；目前獎勵僅為 Coming Soon 預告。減少動態效果設定下停用漸層動畫。詳見 [Plans/012](Plans/012-welcome-modal.md) 及 [素材與提示詞](Design/welcome/README.md)。
 
-登入與註冊表單卡片右上角提供 X，與彈窗共用透明關閉樣式，返回前台首頁。歡迎彈窗的裝飾素材透過瀏覽器 alpha 濾鏡清理低透明度殘影，保留原始素材及全頁模糊遮罩。
+登入與註冊表單卡片右上角提供 X，採用 Welcome Rewards 彈窗相同的淡紫圓框關閉樣式，返回前台首頁。歡迎彈窗的裝飾素材透過瀏覽器 alpha 濾鏡清理低透明度殘影，保留原始素材及全頁模糊遮罩。
 
 ## Promo 活動頁
 
