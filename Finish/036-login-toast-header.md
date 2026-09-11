@@ -28,3 +28,5 @@ Toast錯誤圖示已改為紅色漸層圓底、單一白色驚嘆號，移除雙
 ## 部署
 
 程式提交ee867ab已推送main；[GitHub Pages](https://github.com/fayipon/kun-king/actions/runs/34554177754)成功。線上HTML已載入本次index-D-yltZAK.js與index-BpL-4lzA.css。
+
+自動填入樣式修正：登入／註冊欄位加入autofill深色內陰影、白色文字與游標，外容器同色避免接縫，保留autocomplete。建置通過；真實瀏覽器密碼管理器填入未自動化驗證。

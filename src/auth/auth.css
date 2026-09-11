@@ -24,6 +24,17 @@
 .auth-input:focus-within { border-color: var(--aqua); box-shadow: 0 0 0 2px #5df5c21b; }.auth-input.has-error { border-color: #fca5bc; }
 .auth-input > svg { flex-shrink: 0; }.auth-input input { width: 100%; min-width: 0; height: 47px; border: 0; background: transparent; color: white; outline: none; font-size: 13px; }.auth-input input::placeholder { color: #a3b2b8; }.auth-page .auth-input input:focus-visible { outline: none; }
 .auth-input button { flex-shrink: 0; display: grid; place-items: center; width: 28px; height: 42px; color: #9badb4; background: none; border: 0; padding: 0; }
+/* Cover browser autofill paint while retaining saved-login assistance. */
+.auth-input:has(input:is(:autofill, :-webkit-autofill)) { background: #172c32; }
+.auth-input input:is(:autofill, :-webkit-autofill),
+.auth-input input:is(:autofill, :-webkit-autofill):hover,
+.auth-input input:is(:autofill, :-webkit-autofill):focus {
+  -webkit-box-shadow: 0 0 0 1000px #172c32 inset;
+  box-shadow: 0 0 0 1000px #172c32 inset;
+  -webkit-text-fill-color: #fff;
+  color: #fff;
+  caret-color: #fff;
+}
 .auth-options { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; margin-top: 3px; }.auth-options label { display: flex; align-items: center; gap: 7px; }
 .auth-page input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--aqua); flex-shrink: 0; margin: 0; cursor: pointer; }
 .auth-text-link, .auth-switch a { padding: 0; background: none; border: 0; color: var(--aqua); text-decoration: underline; text-underline-offset: 3px; font-size: inherit; }
@@ -78,4 +89,3 @@
   0%,100% { box-shadow:0 12px 50px #0006,0 0 16px #5df5c22c,0 0 24px #b844f426; }
   50% { box-shadow:0 12px 50px #0006,0 0 16px #b844f43a,0 0 24px #5df5c226; }
 }
-
