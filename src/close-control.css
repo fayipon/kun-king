@@ -1,12 +1,12 @@
 /* Shared by the welcome modal and both authentication cards. */
-.kk-lobby .kk-welcome-close, .auth-page .auth-close {
+.kk-lobby .kk-welcome-close, .auth-page .auth-close, .kk-lobby .chest-close {
   display:grid; place-items:center; position:absolute; top:12px; right:11px;
   width:30px; height:30px; padding:0; border-radius:50%;
   border:1px solid #b394c787; background:#110b20bd; color:#ead9ff;
   z-index:3; text-decoration:none;
   outline:2px solid #5df5c2; outline-offset:3px;
 }
-.kk-lobby .kk-welcome-close:focus-visible, .auth-page .auth-close:focus-visible {
+.kk-lobby .kk-welcome-close:focus-visible, .auth-page .auth-close:focus-visible, .kk-lobby .chest-close:focus-visible {
   outline:2px solid #5df5c2; outline-offset:3px;
   box-shadow:inset 0 0 0 1px #5df5c2;
 }

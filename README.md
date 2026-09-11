@@ -176,8 +176,14 @@ Deposit／Withdraw 僅顯示服務準備中及登入／註冊入口，不接受�
 
 ## Affiliate 邀請獎勵預覽
 
-[Affiliate 頁](https://fayipon.github.io/kun-king/#/affiliate) 依 Design/invite.png 呈現三欄統計、原圖旅程地圖、五階段寶箱、邀請進度與最近好友。15 invites 寶箱周圍局部閃光；旗幟字樣柔和變色；減少動態時改為靜態高亮。
+[Affiliate 頁](https://fayipon.github.io/kun-king/#/affiliate) 依 Design/invite.png 呈現三欄統計、原圖旅程地圖、五階段寶箱、邀請進度與最近好友。初始5／10 invites為金色未領寶箱，15／20／25為灰色鎖箱；領取後對應寶箱變綠色打勾，未領金箱周圍柔和發光；旗幟字樣柔和變色；減少動態時改為靜態高亮。
 
-View Rewards／寶箱節點顯示門檻；Invite Friends 提供示範碼、註冊連結、複製與登入／註冊入口；Open Chest 提供兩階段開箱预覽；View all 與好友列可查看完整示範紀錄。原生 dialog 支援 Esc、遮罩、X、焦點回復與捲動鎖。
+View Rewards／寶箱節點顯示門檻；Invite Friends 提供示範碼、註冊連結、複製與登入／註冊入口；Open Chest 提供浮起、輕抖、掀蓋光效及獎勵面板；View all 與好友列可查看完整示範紀錄。原生 dialog 支援 Esc、遮罩、X、焦點回復與捲動鎖。
 
-資料集中於 src/affiliate/data.ts，示範日固定 2026-09-11。未連接真實推薦關係、資格判定或獎勵服務，開箱不扣寶箱也不變動 Wallet。詳見 [Plans/027](Plans/027-affiliate-page.md)、[Finish/027](Finish/027-affiliate-page.md)、[素材紀錄](Design/affiliate/README.md)。
+資料集中於 src/affiliate/data.ts，示範日固定 2026-09-11。未連接真實推薦關係、資格判定或獎勵服務，開箱取消不扣箱；Claim preview 只扣本次頁面的示範箱數，不變動 Wallet。詳見 [Plans/027](Plans/027-affiliate-page.md)、[Finish/027](Finish/027-affiliate-page.md)、[素材紀錄](Design/affiliate/README.md)。
+
+### Open Chest 動畫
+
+Open Chest 依序預覽5／10次門檻寶箱：浮起→輕抖三下→停頓→掀蓋及光芒→₱50示範獎勵卡。Claim preview 後剩餘箱數2→1→0；中途取消不扣箱。Reset preview、刷新或離開重進會恢復2箱；沒有真實發獎或Wallet入帳。減少動態時直接顯示靜態獎勵卡。
+
+詳見 [Plans/035](Plans/035-open-chest-effect.md)、[Finish/035](Finish/035-open-chest-effect.md) 及 [開箱素材紀錄](Design/chest/README.md)。
